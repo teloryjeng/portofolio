@@ -1,5 +1,8 @@
 // Persona 5 Page Transition Handler
 (function () {
+    // Immediately block scrolling during initial loading transition
+    document.documentElement.classList.add('p5-transition-active');
+
     let overlayInjected = false;
     const startTime = Date.now();
     const minLoadDuration = 600; // Minimum time (ms) to show transition for visual satisfaction
@@ -71,7 +74,11 @@
     // 2. Remove Transition (Intro transition on page load)
     function endTransition() {
         const overlay = document.getElementById('p5-transition-overlay');
-        if (!overlay) return;
+        if (!overlay) {
+            document.documentElement.classList.remove('p5-transition-active');
+            if (document.body) document.body.classList.remove('p5-transition-active');
+            return;
+        }
 
         const elapsedTime = Date.now() - startTime;
         const remainingTime = Math.max(0, minLoadDuration - elapsedTime);
@@ -79,6 +86,9 @@
         // Ensure transition stays visible for at least minLoadDuration to look amazing
         setTimeout(() => {
             overlay.classList.add('p5-loaded');
+            // Restore scrolling
+            document.documentElement.classList.remove('p5-transition-active');
+            document.body.classList.remove('p5-transition-active');
         }, remainingTime);
     }
 
@@ -132,6 +142,10 @@
             e.preventDefault();
             const overlay = document.getElementById('p5-transition-overlay');
             if (overlay) {
+                // Block scrolling during transition
+                document.documentElement.classList.add('p5-transition-active');
+                document.body.classList.add('p5-transition-active');
+
                 overlay.classList.remove('p5-loaded');
 
                 // Navigate to the target page after the slashes finish sliding in
@@ -146,6 +160,9 @@
 
     // Initializer
     function init() {
+        if (document.body) {
+            document.body.classList.add('p5-transition-active');
+        }
         initLetters();
         setupLinkInterception();
 

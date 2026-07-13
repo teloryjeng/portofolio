@@ -1,5 +1,12 @@
 /* Persona 5 Page Transition Styles */
 
+/* Prevent scrolling during transitions */
+html.p5-transition-active,
+body.p5-transition-active {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
 #p5-transition-overlay {
     position: fixed;
     top: 0;
