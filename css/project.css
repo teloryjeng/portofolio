@@ -1,0 +1,385 @@
+/* Projects Page Styles */
+
+/* Hero Section */
+.project-hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    padding-top: var(--header-height);
+}
+
+.project-hero-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.project-hero-text-col {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-hero-bg-col {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 45%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.12;
+    /* Faded wireframe */
+    margin: 0;
+    padding: 0;
+}
+
+.project-hero-bg-img {
+    height: 105%;
+    width: auto;
+    object-fit: contain;
+    object-position: right center;
+    margin: 0;
+    -webkit-mask-image: radial-gradient(ellipse at right center, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 95%);
+    mask-image: radial-gradient(ellipse at right center, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 95%);
+}
+
+.project-quote-section {
+    padding: clamp(3rem, 7vw, 5rem) 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color);
+}
+
+.project-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.2vw, 2.5rem);
+    line-height: 1.5;
+    color: var(--text-white);
+    max-width: 850px;
+    margin: 6rem auto 8rem auto;
+    text-align: center;
+    font-style: italic;
+    font-weight: 100;
+    opacity: 0.9;
+    letter-spacing: -0.01em;
+}
+
+/* Grid Layout for 12 projects */
+.project-grid-section {
+    background-color: var(--bg-color);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    background-color: #000000;
+    overflow: hidden;
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background-color: #000000;
+}
+
+.project-image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+.project-img.img-contain {
+    object-fit: contain;
+    padding: 4% 0;
+    background-color: #0D0D0D;
+    /* Match site background */
+}
+
+/* Card Overlays & Hover Animations */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.72);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.04);
+}
+
+/* Logo Overlays */
+.project-logo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.project-logo {
+    max-width: 55%;
+    max-height: 55%;
+    object-fit: contain;
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Custom dimensions for specific logos */
+.project-logo.logo-atbraya {
+    max-width: 78%;
+    max-height: 78%;
+}
+
+.project-logo.logo-if {
+    max-width: 60%;
+    max-height: 60%;
+}
+
+.project-logo.logo-reog {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.project-logo.logo-memospace {
+    max-width: 60%;
+    max-height: 60%;
+}
+
+.project-logo.logo-webrtc {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.project-card:hover .project-logo-overlay {
+    opacity: 1;
+}
+
+.project-card:hover .project-logo {
+    transform: scale(1);
+}
+
+.project-card:hover .logo-webrtc {
+    transform: scale(1.35);
+}
+
+/* Text Overlays for Cards without Logos */
+.project-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.project-overlay-title {
+    font-family: var(--font-project-title);
+    font-weight: 700;
+    color: var(--text-white);
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-overlay-desc {
+    font-family: var(--font-project-title);
+    color: rgba(255, 255, 255, 0.8);
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-card:hover .project-text-overlay {
+    opacity: 1;
+}
+
+.project-card:hover .project-overlay-title,
+.project-card:hover .project-overlay-desc {
+    transform: scale(1);
+}
+
+/* Text Overlays Sizing & Theme Colors */
+.title-virtucare {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    color: #018CF8;
+    -webkit-text-stroke-width: 0.8px;
+    -webkit-text-stroke-color: #FFFFFF;
+}
+
+.desc-virtucare {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #018CF8;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: #FFFFFF;
+}
+
+.title-nasihat {
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
+}
+
+.desc-nasihat {
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+}
+
+.title-memospace {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #FFCC00;
+}
+
+.desc-memospace {
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: #FFFFFF;
+}
+
+.title-djuanda {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #E52E2E;
+}
+
+.desc-djuanda {
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+}
+
+.title-husk {
+    font-size: clamp(0.1rem, 7vw, 7rem);
+    font-family: 'Nativera', sans-serif;
+    font-weight: 700;
+    filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
+}
+
+.desc-husk {
+    margin-top: -2%;
+    font-size: clamp(1rem, 1vw, 1rem);
+    font-weight: 700;
+}
+
+.title-smarthome {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #743FA7;
+    filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
+}
+
+.desc-smarthome {
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+}
+
+.title-leclerc {
+    font-size: clamp(0.1rem, 10vw, 10rem);
+    color: #E52E2E;
+    font-family: 'Genty', sans-serif;
+}
+
+.desc-leclerc {
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 200;
+}
+
+/* Custom layout for stacked images in Miftakhul Firdaus banner card */
+.if-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0D0518;
+    height: 100%;
+}
+
+.if-img-top {
+    width: 95%;
+    height: 50%;
+    object-fit: contain;
+    padding-top: 5%;
+}
+
+.if-img-bottom {
+    width: 95%;
+    height: 50%;
+    object-fit: contain;
+    padding-bottom: 5%;
+}
+
+/* Responsive Grid styling */
+@media (max-width: 992px) {
+    .project-hero-container {
+        padding: 3rem 2rem;
+    }
+
+    .project-hero-bg-col {
+        width: 35%;
+        opacity: 0.08;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-hero-section {
+        min-height: 35vh;
+        text-align: center;
+    }
+
+    .project-hero-container {
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .project-hero-bg-col {
+        display: none;
+    }
+
+    .project-hero-quote {
+        text-align: center;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}

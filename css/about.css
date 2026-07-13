@@ -1,0 +1,208 @@
+/* About Me Page Styles */
+
+.about-hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.about-hero-container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    align-items: center;
+    gap: 4rem;
+}
+
+.about-hero-text-col {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+}
+
+.about-hero-text-content {
+    max-width: 600px;
+}
+
+.about-hero-sub {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    letter-spacing: 0.1em;
+    color: var(--text-white);
+    margin-top: 1.5rem;
+    font-weight: 500;
+}
+
+.about-hero-image-col {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.about-hero-image-wrapper {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+}
+
+.about-hero-img {
+    margin-left: -10%;
+    width: 110%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    filter: brightness(0.95);
+    /* Soft blend vignette mask */
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
+}
+
+.about-intro-section {
+    padding: clamp(4rem, 10vw, 8rem) 0;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.about-main-desc {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3.2vw, 1.7rem);
+    line-height: 1.6;
+    color: var(--text-white);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    opacity: 0.95;
+    letter-spacing: -0.01em;
+}
+
+.about-story-section {
+    padding: 6rem 0;
+    background-color: var(--bg-color);
+}
+
+.about-story-section .section-container {
+    max-width: 1350px;
+    /* Defaultnya 1200px, diubah lebih lebar agar foto story lebih besar */
+    padding: 0 1rem;
+    /* Menyesuaikan jarak padding kiri dan kanan */
+}
+
+.story-row {
+    display: flex;
+    align-items: center;
+    /* Vertically center elements inside the row */
+    gap: 5rem;
+    margin-bottom: 7rem;
+}
+
+.story-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.story-image-col {
+    flex: 1.25;
+    /* Image column is wider */
+    display: flex;
+    justify-content: center;
+}
+
+.story-text-col {
+    flex: 0.8;
+    /* Text column is narrower */
+}
+
+.story-image-wrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    transition: var(--transition-smooth);
+}
+
+.story-image-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 50px rgba(229, 46, 46, 0.15);
+}
+
+.story-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: var(--transition-smooth);
+}
+
+.story-image-wrapper:hover .story-img {
+    filter: brightness(1);
+}
+
+.story-desc {
+    font-family: var(--font-serif);
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    line-height: 1.2;
+    color: var(--text-white);
+    opacity: 0.95;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.01em;
+}
+
+.story-desc:last-child {
+    margin-bottom: 0;
+}
+
+.about-cta-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+}
+
+/* About responsive styling */
+@media (max-width: 992px) {
+    .about-hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+        gap: 3rem;
+    }
+
+    .about-hero-text-col {
+        align-items: center;
+        padding-left: 0;
+        order: 2;
+    }
+
+    .about-hero-image-col {
+        order: 1;
+    }
+
+    .story-row,
+    .story-row.reverse {
+        flex-direction: column;
+        gap: 2.5rem;
+        margin-bottom: 6rem;
+    }
+
+    .story-image-col {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .story-text-col {
+        width: 100%;
+    }
+
+    .about-cta-container {
+        margin-top: 4rem;
+    }
+}

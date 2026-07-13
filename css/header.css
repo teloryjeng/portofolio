@@ -1,0 +1,138 @@
+/* Header / Navigation styles */
+.main-header {
+    height: var(--header-height);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4rem;
+    background-color: rgba(13, 13, 13, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo-link {
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.logo-wrapper {
+    position: relative;
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+
+.logo-default,
+.logo-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.logo-hover {
+    opacity: 0;
+}
+
+.logo-link:hover .logo-default {
+    opacity: 0;
+}
+
+.logo-link:hover .logo-hover {
+    opacity: 1;
+}
+
+.nav-pill {
+    display: flex;
+    margin-left: -45%;
+    background-color: rgba(28, 28, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    padding: 0px 15px;
+    gap: 1px;
+}
+
+.nav-link {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-white);
+    text-decoration: none;
+    padding: 5px 30px;
+    border-radius: 20px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #DA291C;
+    /* Fallback hover color */
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .nav-link {
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        background: linear-gradient(to right, #ffffff 0%, #ffffff 33%, #DA291C 66%, #78111C 100%);
+        background-size: 300% 100%;
+        background-position: 0 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        transition: background-position 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .nav-link:hover {
+        background-position: 100% 0;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.header-spacer {
+    flex: 1;
+}
+
+/* Header Responsive styling */
+@media (max-width: 1200px) {
+    .main-header {
+        padding: 0 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0 1.5rem;
+    }
+
+    .logo-container {
+        flex: initial;
+    }
+
+    .header-spacer {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-link {
+        padding: 6px 14px;
+        font-size: 0.7rem;
+    }
+}

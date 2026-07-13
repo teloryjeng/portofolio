@@ -1,0 +1,333 @@
+/* Home Page Styles */
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    align-items: center;
+    gap: 4rem;
+}
+
+.hero-image-col {
+    flex: 1.1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image-wrapper {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+.hero-img {
+    margin-left: -2%;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    filter: brightness(0.95);
+
+    /* Smooth radial mask to fade all 4 edges into the background */
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 98%);
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 98%);
+}
+
+.hero-text-col {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10rem;
+}
+
+.hero-text-content {
+    max-width: 580px;
+}
+
+
+.hero-subtitles {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 450;
+    letter-spacing: 0.1em;
+    color: var(--text-white);
+    flex-wrap: wrap;
+}
+
+.subtitle-item {
+    position: relative;
+}
+
+/* Description / Quote Section */
+.about-section {
+    padding: clamp(5rem, 12vw, 10rem) 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color);
+}
+
+.about-description {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 3.8vw, 2.1rem);
+    line-height: 1.6;
+    color: var(--text-white);
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: left;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    opacity: 0.95;
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 0 0;
+    background-color: var(--bg-color);
+    text-align: center;
+}
+
+.projects-heading {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 550;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    padding: 0 1.5rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    background-color: #000;
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+.project-image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+/* Hover effects for project cards */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.04);
+}
+
+/* Logo overlay hover effect */
+.project-logo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.project-logo {
+    max-width: 55%;
+    max-height: 55%;
+    object-fit: contain;
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-logo.logo-atbraya {
+    max-width: 78%;
+    max-height: 78%;
+}
+
+.project-card:hover .project-logo-overlay {
+    opacity: 1;
+}
+
+.project-card:hover .project-logo {
+    transform: scale(1);
+}
+
+/* Text overlay hover effect for Virtucare and Nasihat Maut */
+.project-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.project-overlay-title {
+    font-family: var(--font-project-title);
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 0.5rem;
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    letter-spacing: 0.02em;
+}
+
+.project-overlay-desc {
+    font-family: var(--font-project-title);
+    color: rgba(255, 255, 255, 0.8);
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Virtucare Specific Sizing */
+.title-virtucare {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #018CF8;
+    -webkit-text-stroke-width: 0.72px;
+    -webkit-text-stroke-color: #FFF;
+}
+
+.desc-virtucare {
+    font-size: clamp(1.7rem, 2.2vw, 1.25rem);
+    color: #018CF8;
+    line-height: .01;
+    margin-top: 0rem;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: #FFF;
+}
+
+/* Nasihat Maut Specific Sizing */
+.title-nasihat {
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+}
+
+.desc-nasihat {
+    font-size: clamp(1.1rem, 2.6vw, 1.45rem);
+    line-height: .05;
+    margin-top: 0.5rem;
+}
+
+.project-card:hover .project-text-overlay {
+    opacity: 1;
+}
+
+.project-card:hover .project-overlay-title,
+.project-card:hover .project-overlay-desc {
+    transform: scale(1);
+}
+
+.projects-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+
+
+/* Home Page Responsive Styling */
+@media (max-width: 1200px) {
+    .hero-container {
+        padding: 0 2rem;
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+        gap: 3rem;
+    }
+
+    .hero-image-col {
+        justify-content: center;
+        order: 1;
+    }
+
+    .hero-text-col {
+        align-items: center;
+        order: 2;
+        padding-left: 0;
+    }
+
+    .hero-subtitles {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .about-section {
+        padding: clamp(3rem, 8vw, 6rem) 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-subtitles {
+        font-size: 0.75rem;
+        gap: 1rem;
+    }
+}

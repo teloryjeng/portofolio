@@ -1,0 +1,202 @@
+/* CSS Reset and Variables */
+:root {
+    --bg-color: #0D0D0D;
+    --card-bg: #0D0D0D;
+    --primary-color: #E52E2E;
+    /* Red accent */
+    --primary-hover: linear-gradient(to right, #DA291C, #78111C);
+    --text-white: #FFFFFF;
+    --text-muted: #8E8E93;
+    --text-dark-grey: #1C1C1E;
+
+    --font-hero-name: 'Racing Sans One', sans-serif;
+    --font-alumni: 'Alumni Sans', sans-serif;
+    --font-antic: 'Antic Didone', serif;
+
+    --font-heading: 'Alumni Sans', sans-serif;
+    --font-project-title: 'Arial', sans-serif;
+    --font-serif: 'Antic Didone', serif;
+    --font-body: 'Alumni Sans', sans-serif;
+
+    --header-height: 80px;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    font-size: 18px;
+    /* Slightly larger base size for condensed body font */
+}
+
+body {
+    overflow-x: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 500;
+}
+
+/* Image protection against direct Save As and Drag & Drop */
+img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+/* Common Layout Containers */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Button Components (Shared and Independent) */
+.btn-primary,
+.btn-hero,
+.btn-see-projects {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 36px;
+    transition: var(--transition-smooth);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.btn-primary {
+    font-size: 1.25rem;
+    font-style: normal;
+    padding: 7px 35px;
+}
+
+.btn-hero {
+    font-size: 1.1rem;
+    font-style: normal;
+    padding: 12px 32px;
+}
+
+.btn-see-projects {
+    font-size: 1.25rem;
+    font-style: normal;
+    padding: 12px 50px;
+}
+
+.btn-primary::before,
+.btn-hero::before,
+.btn-see-projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-hover);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before,
+.btn-hero:hover::before,
+.btn-see-projects:hover::before {
+    opacity: 1;
+}
+
+.btn-primary:hover,
+.btn-hero:hover,
+.btn-see-projects:hover {
+    border: none;
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 46, 46, 0.35);
+}
+
+.btn-primary:active,
+.btn-hero:active,
+.btn-see-projects:active {
+    transform: translateY(0);
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-arrow,
+.btn-hero:hover .btn-arrow,
+.btn-see-projects:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Shared Hero Name Typography */
+.hero-first-name {
+    font-family: var(--font-hero-name);
+    font-size: clamp(2.6rem, 7.5vw, 4.8rem);
+    font-weight: 800;
+    font-style: italic;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.02em;
+}
+
+.hero-last-name {
+    font-family: var(--font-hero-name);
+    font-size: clamp(3.8rem, 11vw, 7.5rem);
+    font-weight: 400;
+    color: var(--text-white);
+    line-height: 0.95;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+}
+
+/* Collaborate Section */
+.collaborate-section {
+    padding: 5rem 0;
+    text-align: center;
+    background-color: var(--bg-color);
+}
+
+.collaborate-tagline {
+    display: block;
+    font-family: var(--font-serif);
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.collaborate-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    font-weight: 500;
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.collaborate-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 650;
+}
