@@ -1,7 +1,5 @@
 // Persona 5 Page Transition Handler
 (function () {
-    // Immediately block scrolling during initial loading transition
-    document.documentElement.classList.add('p5-transition-active');
 
     let overlayInjected = false;
     const startTime = Date.now();
@@ -75,7 +73,6 @@
     function endTransition() {
         const overlay = document.getElementById('p5-transition-overlay');
         if (!overlay) {
-            document.documentElement.classList.remove('p5-transition-active');
             if (document.body) document.body.classList.remove('p5-transition-active');
             return;
         }
@@ -87,8 +84,7 @@
         setTimeout(() => {
             overlay.classList.add('p5-loaded');
             // Restore scrolling
-            document.documentElement.classList.remove('p5-transition-active');
-            document.body.classList.remove('p5-transition-active');
+            if (document.body) document.body.classList.remove('p5-transition-active');
         }, remainingTime);
     }
 
@@ -143,8 +139,7 @@
             const overlay = document.getElementById('p5-transition-overlay');
             if (overlay) {
                 // Block scrolling during transition
-                document.documentElement.classList.add('p5-transition-active');
-                document.body.classList.add('p5-transition-active');
+                if (document.body) document.body.classList.add('p5-transition-active');
 
                 overlay.classList.remove('p5-loaded');
 
