@@ -36,7 +36,7 @@
             <nav class="nav-pill">
                 <a href="${prefix}about.html" class="nav-link ${isAboutPage ? 'active' : ''}">ABOUT ME</a>
                 <a href="${prefix}project.html" class="nav-link ${isProjectPage ? 'active' : ''}">MY PROJECT</a>
-                <a href="${prefix}index.html#photography" class="nav-link">PHOTOGRAPHY SIDE</a>
+                <a href="${prefix}photography.html" class="nav-link">PHOTOGRAPHY SIDE</a>
             </nav>
             <div class="header-spacer"></div>
         </header>
