@@ -153,6 +153,19 @@
         });
     }
 
+    // Listen to pageshow to handle bfcache (back-forward cache) restores when navigating back
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            const overlay = document.getElementById('p5-transition-overlay');
+            if (overlay) {
+                overlay.classList.add('p5-loaded');
+            }
+            if (document.body) {
+                document.body.classList.remove('p5-transition-active');
+            }
+        }
+    });
+
     // Initializer
     function init() {
         if (document.body) {

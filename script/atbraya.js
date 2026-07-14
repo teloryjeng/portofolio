@@ -36,6 +36,15 @@ function init3DViewer(canvasId, modelUrl) {
                 // Model Loaded successfully!
                 canvas.style.opacity = '1';
 
+                // Hide loading screen with a smooth fade-out
+                const loadingIndicator = document.getElementById('lightbox-3d-loading');
+                if (loadingIndicator) {
+                    loadingIndicator.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingIndicator.style.display = 'none';
+                    }, 500);
+                }
+
                 // 4. Use Babylon's helper to create Camera & Light optimized for glTF PBR models
                 scene.createDefaultCameraOrLight(true, true, true);
 
@@ -98,6 +107,12 @@ function init3DViewer(canvasId, modelUrl) {
             function (sceneError, message) {
                 console.error("Failed to load 3D Model:", message);
                 canvas.style.opacity = '1';
+
+                // Hide loading screen instantly on error
+                const loadingIndicator = document.getElementById('lightbox-3d-loading');
+                if (loadingIndicator) {
+                    loadingIndicator.style.display = 'none';
+                }
 
                 // Show a helpful error message on screen (often CORS file:// protocol issue)
                 const caption = document.querySelector('.lightbox-caption');
