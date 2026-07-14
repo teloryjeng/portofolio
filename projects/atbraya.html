@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="ATB Raya Map Project - Mod peta Jawa Timur realistis untuk Euro Truck Simulator 2 oleh Muhammad Sururi Ardan.">
+    <title>ATB Raya Map | Sururi Ardan</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Alumni+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Antic+Didone&display=swap"
+        rel="stylesheet">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/transition.css">
+    <script src="../script/transition.js" defer></script>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/atbraya.css">
+    <link rel="stylesheet" href="../css/project-overlay.css">
+    <link rel="stylesheet" href="../css/project-loading.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../fonts/font.css">
+    <link rel="icon" type="image/png" href="../assets/logo/sdefault.png">
+    <link rel="apple-touch-icon" href="../assets/logo/sdefault.png">
+    <!-- Babylon.js CDNs for 3D GLB Rendering -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="../script/project-3d.js" defer></script>
+    <script src="../script/project-loading.js" defer></script>
+    <!-- Google Model Viewer component for lightweight shared WebGL grid rendering -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header / Navigation -->
+    <script src="../script/header.js"></script>
+
+    <main>
+        <!-- Project Hero Section -->
+        <section class="project-detail-hero">
+            <div class="hero-bg-container">
+                <img src="../assets/img/atbraya/hero.jpg" alt="ATB Raya Map Hero" class="hero-bg-img">
+            </div>
+            <div class="hero-content-overlay">
+                <div class="section-container">
+                    <div class="hero-titles">
+                        <img src="../assets/logo/atbraya.png" alt="ATB Raya Logo" class="hero-logo-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story / Explanation Section -->
+        <section class="project-story-section">
+            <div class="section-container">
+                <h2 class="story-heading">STORY OF THIS PROJECT</h2>
+
+                <!-- Row 1: Image Left, Text Right -->
+                <div class="story-row">
+                    <div class="story-image-col">
+                        <div class="story-image-wrapper no-border">
+                            <img src="../assets/logo/ets2.png" alt="Scania Truck ETS2" class="story-img">
+                        </div>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Berawal dari kegemaran mengeksplorasi simulator transportasi Euro Truck Simulator 2, muncul
+                            ketertarikan mendalam untuk menghadirkan rute-rute lokal khas Indonesia. Projek mod
+                            Map ATB Raya ini dirancang untuk merekonstruksi jalur lintas Jawa Timur dengan detail dan
+                            atmosfer yang autentik.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 2: Text Left, Image Right -->
+                <div class="story-row reverse">
+                    <div class="story-image-col">
+                        <div class="story-image-wrapper">
+                            <img src="../assets/img/atbraya/474550478_1411770806865489_8178447133579520900_n 1.png"
+                                alt="Preview Taman Prambangan - Gresik" class="story-img">
+                        </div>
+                        <span class="row-number-badge">01</span>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Sebelum Map ATB Raya, nama awal dari mod map ini adalah Surabaya Raya Map, yang dimana
+                            target jalur yang akan dibuat adalah wilayah Surabaya Raya yaitu Gresik-Surabaya-Sidoarjo
+                            yang setiap daerahnya memiliki landmark masing-masing.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 3: Video Player Left, Text Right -->
+                <div class="story-row">
+                    <div class="story-image-col">
+                        <div class="story-video-wrapper">
+                            <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/GvSctZNF1OU?si=FNvU6pgajWijTwGi"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <span class="row-number-badge">02</span>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Titik balik pun tiba ketika versi Beta dirilis secara terbatas. Antusiasme komunitas meledak
+                            di luar dugaan. Puncaknya adalah saat "Mbah Purnomo", YouTuber ETS2 paling berpengaruh di
+                            Indonesia, mereview mod ini hingga disaksikan lebih dari 300 ribu kali. Lonjakan apresiasi
+                            itu menjadi bahan bakar baru; sebuah momentum yang memaksa untuk menyelam lebih dalam ke
+                            dunia modding, khususnya 3D modelling.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 4: Text Left, Image Right -->
+                <div class="story-row reverse">
+                    <div class="story-image-col">
+                        <div class="story-video-wrapper">
+                            <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/cyjDUaQROe0?si=2ukW_sKPzYbc_Ojh"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <span class="row-number-badge">03</span>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Bermodal video tutorial YouTube dan keberanian untuk terus bertanya kepada para senior di
+                            komunitas, proses belajar pun dimulai dari nol. Langkah awal diayunkan dengan membuat model
+                            3D sederhanaâ€”seperti Monumen Tuguâ€”hingga memahami rumitnya proses konversi agar aset
+                            tersebut bisa tampil sempurna di dalam game.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 5: Image Left, Text Right -->
+                <div class="story-row">
+                    <div class="story-image-col">
+                        <div class="story-image-wrapper">
+                            <!-- Using Property 1=Default.jpg for 5th row layout (we will style it cleanly) -->
+                            <img src="../assets/img/atbraya/ets2_20260608_203741_00 1.png"
+                                alt="Progress Jalur Hingga Saat Ini" class="story-img">
+                        </div>
+                        <span class="row-number-badge">04</span>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Kini, projek sederhana itu telah bertransformasi menjadi Map ATB Raya. Jalurnya tidak lagi
+                            sekadar berputar di Surabaya, melainkan sudah membentang jauh menembus Malang hingga
+                            Tulungagung. Keberhasilan ini bukanlah hasil kerja tunggal. Ketika kesibukan bangku
+                            perkuliahan mulai menyita waktu dan perhatian, tangan-tangan suportif dari teman-teman
+                            komunitas datang mengulurkan bantuan, bahu-membahu meneruskan sisa jalur hingga target besar
+                            ini akhirnya bisa terwujud.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Tools Used Section -->
+        <section class="project-tools-section">
+            <div class="section-container">
+                <h2 class="tools-heading">TOOLS USED FOR THIS PROJECT</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <img src="../assets/logo/devicon_photoshop.png" alt="Adobe Photoshop" class="tool-logo">
+                        <span class="tool-name">PHOTOSHOP</span>
+                    </div>
+                    <div class="tool-card">
+                        <img src="../assets/logo/logos_blender.png" alt="Blender 3D" class="tool-logo">
+                        <span class="tool-name">BLENDER</span>
+                    </div>
+                    <div class="tool-card">
+                        <img src="../assets/logo/ets2.png" alt="Euro Truck Simulator 2 Editor" class="tool-logo tool-ets">
+                        <span class="tool-name">ETS2 EDITOR</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Artwork / Screenshot Gallery Grid -->
+        <section class="project-gallery-section">
+            <div class="section-container">
+                <h2 class="gallery-heading">3D MODEL IN THIS PROJECT</h2>
+                <div class="gallery-grid">
+                    <!-- Model 1 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 1" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 2 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 2" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 3 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 3" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 4 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 4" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 5 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 5" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 6 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 6" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 7 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 7" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 8 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 8" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 9 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 9" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 10 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 10" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 11 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 11" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                    <!-- Model 12 -->
+                    <div class="gallery-item">
+                        <model-viewer src="../assets/3d/atbraya/masjidmoeldoko.glb" alt="3D Model 12" class="gallery-mv"
+                            loading="lazy" environment-image="neutral" shadow-intensity="1" exposure="1.8"
+                            camera-orbit="45deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collaborate Section -->
+        <section id="collaborate" class="collaborate-section">
+            <div class="section-container">
+                <span class="collaborate-tagline">READY TO COLLABORATE</span>
+                <h2 class="collaborate-title">Mari kita bangun sesuatu yang luar biasa bersama</h2>
+                <p class="collaborate-subtitle">Terbuka untuk kesempatan magang, project freelance atau kolaborasi
+                    riset.</p>
+            </div>
+        </section>
+    </main>
+
+
+
+    <!-- Footer -->
+    <script src="../script/footer.js"></script>
+
+    <!-- JavaScript Interactions -->
+    <script src="../script/script.js"></script>
+
+    <!-- Lightbox & Mobile Warning Overlay Script -->
+    <script src="../script/project-overlay.js"></script>
+</body>
+
+</html>

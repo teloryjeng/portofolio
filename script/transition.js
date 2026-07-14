@@ -174,6 +174,19 @@
         initLetters();
         setupLinkInterception();
 
+        // Expose endTransition globally so other scripts can control it
+        window.endP5Transition = endTransition;
+
+        // Check if we need to show the mobile warning overlay (active on pages with 3D model-viewer)
+        const hasMobileWarning = document.querySelector('model-viewer') && (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024
+        );
+
+        // If warning overlay is shown, let it end the transition later
+        if (hasMobileWarning) {
+            return;
+        }
+
         // Wait for page resources to load fully before sliding out transition
         if (document.readyState === 'complete') {
             endTransition();

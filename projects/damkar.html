@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="3D Model Truk Pemadam Kebakaran - Project pemodelan 3D truk damkar detail tinggi oleh Muhammad Sururi Ardan.">
+    <title>Truk Pemadam Kebakaran | Sururi Ardan</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Alumni+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Antic+Didone&display=swap"
+        rel="stylesheet">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/transition.css">
+    <script src="../script/transition.js" defer></script>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/damkar.css">
+    <link rel="stylesheet" href="../css/project-overlay.css">
+    <link rel="stylesheet" href="../css/project-loading.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../fonts/font.css">
+    <link rel="icon" type="image/png" href="../assets/logo/sdefault.png">
+    <link rel="apple-touch-icon" href="../assets/logo/sdefault.png">
+    <!-- Babylon.js CDNs for 3D GLB Rendering -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="../script/project-3d.js" defer></script>
+    <script src="../script/project-loading.js" defer></script>
+    <!-- Google Model Viewer component for lightweight shared WebGL grid rendering -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header / Navigation -->
+    <script src="../script/header.js"></script>
+
+    <main>
+        <!-- Project Hero Section -->
+        <section class="project-detail-hero">
+            <div class="hero-bg-container">
+                <img src="../assets/img/damkar/untitled.png" alt="Truk Pemadam Kebakaran Hero" class="hero-bg-img">
+            </div>
+            <div class="hero-content-overlay">
+                <div class="section-container">
+                    <div class="hero-titles">
+                        <span class="hero-tagline">3D MODEL PROJECT</span>
+                        <h1 class="hero-main-title">TRUK DAMKAR</h1>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story / Explanation Section -->
+        <section class="project-story-section">
+            <div class="section-container">
+                <h2 class="story-heading">STORY OF THIS PROJECT</h2>
+
+                <!-- Row 1: Image Left, Text Right -->
+                <div class="story-row">
+                    <div class="story-image-col">
+                        <div class="story-image-wrapper">
+                            <img src="../assets/img/damkar/untitled.png" alt="Truk Pemadam Kebakaran Front Preview"
+                                class="story-img">
+                        </div>
+                        <span class="row-number-badge">01</span>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Awalnya ada klien yang ingin memesan jasa pembuatan model 3D truk pemadam kebakaran (damkar)
+                            untuk keperluan game di platform Roblox. Projek ini berfokus pada visualisasi detail mekanis
+                            dan fungsional agar tetap sesuai dengan estetika game namun menghasilkan model berkualitas
+                            tinggi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 2: Text Left, Image Right -->
+                <div class="story-row reverse">
+                    <div class="story-image-col">
+                        <div class="story-image-wrapper">
+                            <img src="../assets/img/damkar/untitled1.png" alt="Truk Pemadam Kebakaran Detailing"
+                                class="story-img">
+                        </div>
+                        <span class="row-number-badge">02</span>
+                    </div>
+                    <div class="story-text-col">
+                        <p class="story-paragraph">
+                            Pemodelan dilakukan dari nol menggunakan software Blender, berpatokan pada referensi foto
+                            asli. Bagian-bagian seperti sirine,
+                            selang tekanan tinggi, dan tangga penyelamat dibuat menyerupai bentuk aslinya.
+                        </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+
+        <!-- Tools Used Section -->
+        <section class="project-tools-section">
+            <div class="section-container">
+                <h2 class="tools-heading">TOOLS USED FOR THIS PROJECT</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <img src="../assets/logo/devicon_photoshop.png" alt="Adobe Photoshop" class="tool-logo">
+                        <span class="tool-name">PHOTOSHOP</span>
+                    </div>
+                    <div class="tool-card">
+                        <img src="../assets/logo/logos_blender.png" alt="Blender 3D" class="tool-logo">
+                        <span class="tool-name">BLENDER</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Artwork / Screenshot Gallery Grid -->
+        <section class="project-gallery-section">
+            <div class="section-container">
+                <h2 class="gallery-heading">3D MODEL IN THIS PROJECT</h2>
+                <div class="gallery-grid">
+                    <!-- Interactive 3D Model -->
+                    <div class="gallery-item gallery-item-centered">
+                        <model-viewer src="../assets/3d/damkar/hino500damkar.glb" alt="3D Model Truk Pemadam Kebakaran"
+                            class="gallery-mv" loading="lazy" environment-image="neutral" shadow-intensity="1"
+                            exposure="1.8" camera-orbit="50deg 90deg 75%">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collaborate Section -->
+        <section id="collaborate" class="collaborate-section">
+            <div class="section-container">
+                <span class="collaborate-tagline">READY TO COLLABORATE</span>
+                <h2 class="collaborate-title">Mari kita bangun sesuatu yang luar biasa bersama</h2>
+                <p class="collaborate-subtitle">Terbuka untuk kesempatan magang, project freelance atau kolaborasi
+                    riset.</p>
+            </div>
+        </section>
+    </main>
+
+
+
+    <!-- Footer -->
+    <script src="../script/footer.js"></script>
+
+    <!-- JavaScript Interactions -->
+    <script src="../script/script.js"></script>
+
+    <!-- Lightbox & Mobile Warning Overlay Script -->
+    <script src="../script/project-overlay.js"></script>
+</body>
+
+</html>

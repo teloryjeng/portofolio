@@ -1,94 +1,80 @@
-/* ATB Raya Project Detail Page Styles */
+/* Nasihat Maut di Pos Ronda Page Styles */
 
 /* 1. Hero Section Styling */
-.project-detail-hero {
-    position: relative;
+.project-ronda-hero {
+    background-color: #ACB99D;
+    /* Custom Javanese Village Green Theme background */
     height: 70vh;
     min-height: 500px;
-    width: 100%;
-    overflow: hidden;
-    background-color: transparent;
-}
-
-.hero-bg-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.hero-bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 68%;
-    filter: brightness(0.45) contrast(1.1);
-    /* Linear gradient mask to fade the bottom of the hero into body */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
-}
-
-.hero-content-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
     display: flex;
     align-items: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
     padding-top: var(--header-height);
 }
 
-.hero-titles {
-    max-width: 800px;
+.hero-ronda-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10rem;
+    width: 100%;
+}
+
+.hero-ronda-image-col {
+    flex: 1.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-ronda-img {
+    max-width: 100%;
+    height: auto;
+    border: 4px solid #000000;
+    box-shadow: 10px 10px 0px #000000;
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease;
+}
+
+.hero-ronda-img:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.hero-ronda-text-col {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: center;
 }
 
-.hero-tagline {
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: var(--primary-color);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-
-.hero-main-title {
-    font-family: var(--font-hero-name);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-style: italic;
-    font-weight: 800;
-    color: var(--text-white);
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.85));
-}
-
-.hero-logo-img {
-    max-width: clamp(240px, 45vw, 420px);
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.85));
-    margin: 1rem 0;
-}
-
-.hero-subtitle {
+.ronda-title-main {
     font-family: var(--font-heading);
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    font-weight: 500;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: #ffffff;
     text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(4px 4px 0px #000000);
+    margin: 0;
+    transform: skewX(-10deg);
+}
+
+.ronda-title-sub {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    filter: drop-shadow(3px 3px 0px #000000);
+    transform: skewX(-5deg);
 }
 
 /* 2. Story Section Styling */
 .project-story-section {
-    padding: 6rem 0;
+    padding: 6rem 0 0;
     background-color: transparent;
 }
 
@@ -118,7 +104,7 @@
     display: flex;
     align-items: center;
     gap: 5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 8rem;
 }
 
 .story-row.reverse {
@@ -137,8 +123,7 @@
     justify-content: center;
 }
 
-.story-image-wrapper,
-.story-video-wrapper {
+.story-image-wrapper {
     position: relative;
     width: 100%;
     border: 3px solid #000000;
@@ -149,31 +134,7 @@
     transition: box-shadow 0.3s ease;
 }
 
-.story-image-wrapper.no-border {
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-}
-
-.story-image-wrapper.no-border::after {
-    display: none;
-}
-
-.story-image-wrapper.no-border .story-img {
-    object-fit: contain;
-}
-
-.story-image-wrapper.no-border:hover {
-    box-shadow: none;
-}
-
-.story-image-wrapper.no-border:hover .story-img {
-    transform: none;
-}
-
-/* Angular cutout shadow effect for a Persona 5 hand-cut paper look */
-.story-image-wrapper::after,
-.story-video-wrapper::after {
+.story-image-wrapper::after {
     content: '';
     position: absolute;
     top: 0;
@@ -193,13 +154,11 @@
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.story-image-wrapper:hover,
-.story-video-wrapper:hover {
+.story-image-wrapper:hover {
     box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.95);
 }
 
-.story-image-wrapper:hover .story-img,
-.story-video-wrapper:hover .story-img {
+.story-image-wrapper:hover .story-img {
     transform: scale(1.05);
 }
 
@@ -235,43 +194,31 @@
     font-weight: 500;
 }
 
-/* Row 3 Video Specifics */
-.story-video-wrapper {
-    cursor: pointer;
+/* 3. Result Section Styling */
+.project-result-section {
+    padding: 6rem 0;
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.video-play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    width: 70px;
-    height: 70px;
-    background-color: var(--primary-color);
+.result-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
     color: var(--text-white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    box-shadow: 4px 4px 0px #000000;
-    border: 3px solid #000000;
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease;
+    margin-bottom: 4rem;
 }
 
-.video-play-btn svg {
-    margin-left: 4px;
-    /* Align play triangle visually */
-    transition: transform 0.3s ease;
+.video-result-container {
+    display: block;
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
 }
 
-.story-video-wrapper:hover .video-play-btn {
-    transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
-    background-color: #ffffff;
-    color: var(--primary-color);
-}
-
-/* 3. Tools Section Styling */
+/* 4. Tools Section Styling */
 .project-tools-section {
     padding: 6rem 0;
     background-color: transparent;
@@ -322,12 +269,6 @@
     filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
 }
 
-.tool-logo.tool-ets {
-    height: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
 .tool-name {
     font-family: var(--font-heading);
     font-size: 1.2rem;
@@ -337,7 +278,7 @@
     text-transform: uppercase;
 }
 
-/* 4. 3D Artwork Gallery Section */
+/* 5. 3D Artwork Gallery Section */
 .project-gallery-section {
     padding: 6rem 0;
     background-color: transparent;
@@ -380,6 +321,11 @@
     filter: brightness(0.9);
 }
 
+.gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+    filter: brightness(1.05) contrast(1.05);
+}
+
 .gallery-mv {
     width: 100%;
     height: 100%;
@@ -389,10 +335,8 @@
     transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.gallery-item:hover .gallery-img,
 .gallery-item:hover .gallery-mv {
     transform: scale(1.05);
-    filter: brightness(1.05) contrast(1.05);
 }
 
 .gallery-item::after {
@@ -408,13 +352,11 @@
     transition: border-color 0.3s ease;
 }
 
-
-
 .gallery-item:hover::after {
     border-color: var(--primary-color);
 }
 
-/* 5. Responsive Styling (Media Queries) */
+/* 6. Responsive Styling (Media Queries) */
 @media (max-width: 1024px) {
     .story-row {
         gap: 3rem;
@@ -422,9 +364,23 @@
 }
 
 @media (max-width: 768px) {
-    .project-detail-hero {
-        height: 50vh;
-        min-height: 400px;
+    .project-ronda-hero {
+        height: auto;
+        padding-bottom: 3rem;
+    }
+
+    .hero-ronda-container {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .hero-ronda-image-col {
+        width: 100%;
+    }
+
+    .hero-ronda-img {
+        max-width: 90%;
     }
 
     .story-row,

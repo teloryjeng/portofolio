@@ -257,15 +257,13 @@
 .title-virtucare {
     font-size: clamp(1.8rem, 4.5vw, 3rem);
     color: #018CF8;
-    -webkit-text-stroke-width: 0.8px;
-    -webkit-text-stroke-color: #FFFFFF;
+    filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
 }
 
 .desc-virtucare {
     font-size: clamp(1rem, 2vw, 1.2rem);
     color: #018CF8;
-    -webkit-text-stroke-width: 0.2px;
-    -webkit-text-stroke-color: #FFFFFF;
+    filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
 }
 
 .title-nasihat {
@@ -296,7 +294,7 @@
 }
 
 .title-husk {
-    font-size: clamp(0.1rem, 7vw, 7rem);
+    font-size: 4.8rem;
     font-family: 'Nativera', sans-serif;
     font-weight: 700;
     filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
@@ -319,7 +317,7 @@
 }
 
 .title-leclerc {
-    font-size: clamp(0.1rem, 10vw, 10rem);
+    font-size: 7.2rem;
     color: #E52E2E;
     font-family: 'Genty', sans-serif;
 }
@@ -387,5 +385,13 @@
 
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .title-husk {
+        font-size: clamp(3rem, 14vw, 4.2rem);
+    }
+
+    .title-leclerc {
+        font-size: clamp(3.8rem, 16vw, 5.2rem);
     }
 }

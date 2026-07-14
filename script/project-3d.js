@@ -1,4 +1,4 @@
-// ATB Raya 3D Model Viewer using Babylon.js
+// Shared 3D GLB Model Viewer using Babylon.js
 let babylonEngine = null;
 let babylonScene = null;
 
@@ -12,9 +12,9 @@ function init3DViewer(canvasId, modelUrl) {
     // 2. Create Scene
     const createScene = function () {
         const scene = new BABYLON.Scene(babylonEngine);
-        scene.clearColor = new BABYLON.Color4(0.05, 0.05, 0.05, 1); // Dark P5 background
+        scene.clearColor = new BABYLON.Color4(0.05, 0.05, 0.05, 1); // Dark background
 
-        // Split modelUrl into folder (rootUrl) and file name (sceneFilename)
+        // Split modelUrl into rootUrl and file name
         const lastSlash = modelUrl.lastIndexOf('/');
         const rootUrl = lastSlash !== -1 ? modelUrl.substring(0, lastSlash + 1) : "";
         const sceneFilename = lastSlash !== -1 ? modelUrl.substring(lastSlash + 1) : modelUrl;
@@ -23,7 +23,7 @@ function init3DViewer(canvasId, modelUrl) {
         const tempCamera = new BABYLON.ArcRotateCamera("tempCamera", 0, 0, 10, BABYLON.Vector3.Zero(), scene);
         scene.activeCamera = tempCamera;
 
-        // 3. Load GLB Model using ImportMesh
+        // 3. Load GLB Model
         BABYLON.SceneLoader.ShowLoadingScreen = true;
         canvas.style.opacity = '0.3';
 
@@ -33,10 +33,10 @@ function init3DViewer(canvasId, modelUrl) {
             sceneFilename,
             scene,
             function (meshes) {
-                // Model Loaded successfully!
+                // Model loaded successfully
                 canvas.style.opacity = '1';
 
-                // Hide loading screen with a smooth fade-out
+                // Hide loading screen
                 const loadingIndicator = document.getElementById('lightbox-3d-loading');
                 if (loadingIndicator) {
                     loadingIndicator.style.opacity = '0';
@@ -45,10 +45,10 @@ function init3DViewer(canvasId, modelUrl) {
                     }, 500);
                 }
 
-                // 4. Use Babylon's helper to create Camera & Light optimized for glTF PBR models
+                // 4. Create Camera & Light optimized for glTF PBR models
                 scene.createDefaultCameraOrLight(true, true, true);
 
-                // Dispose temporary camera since we now have the framed camera
+                // Dispose temporary camera
                 const oldTemp = scene.getCameraByName("tempCamera");
                 if (oldTemp) {
                     oldTemp.dispose();
@@ -59,65 +59,49 @@ function init3DViewer(canvasId, modelUrl) {
                 if (camera) {
                     camera.attachControl(canvas, true);
                     camera.useAutoRotationBehavior = true;
-                    
-                    // Set auto rotation speed
                     if (camera.autoRotationBehavior) {
-                        camera.autoRotationBehavior.idleRotationSpeed = 0.2; // Smooth auto rotation
+                        camera.autoRotationBehavior.idleRotationSpeed = 0.2;
                     }
-
-                    // Add zoom limits
                     camera.lowerRadiusLimit = 2;
                     camera.upperRadiusLimit = 150;
+
+                    // Add lightweight Ambient Occlusion (SSAO) to create realistic contact shadows
+                    try {
+                        const ssao = new BABYLON.SSAORenderingPipeline("ssaoPipeline", scene, 1.0, [camera]);
+                        ssao.totalStrength = 1.0;
+                        ssao.radius = 0.75;
+                    } catch (e) {
+                        console.warn("Ambient Occlusion (SSAO) is not supported on this device/browser:", e);
+                    }
                 }
 
-                // 6. Enhance Lighting to simulate Blender Eevee physical engine
-                // Load high-quality prefitered environment texture from Babylon CDN for realistic PBR reflections
+                // 6. Enhance Lighting
                 const envTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(
                     "https://assets.babylonjs.com/environments/environmentSpecular.env", 
                     scene
                 );
                 scene.environmentTexture = envTexture;
-                scene.environmentIntensity = 2.5; // Strong ambient specular reflections (Eevee style)
+                scene.environmentIntensity = 0.5; // Soften environment reflections (down from 2.5)
 
-                // Configure dedicated direct sunlight DirectionalLight
-                let sunLight = scene.getLightByName("sunLight");
-                if (!sunLight) {
-                    sunLight = new BABYLON.DirectionalLight("sunLight", new BABYLON.Vector3(-1, -2.5, -1).normalize(), scene);
+                // Configure standard lights
+                const dirLight = scene.getLightByName("default light");
+                if (dirLight) {
+                    dirLight.intensity = 0.8; // Lower light intensity (down from 2.5)
                 }
-                sunLight.intensity = 4.0; // Strong sunlight
-                sunLight.diffuse = new BABYLON.Color3(1.0, 0.98, 0.93); // Warm sun light
-
-                // Configure sky fill HemisphericLight
-                let skyLight = scene.getLightByName("skyLight");
-                if (!skyLight) {
-                    skyLight = new BABYLON.HemisphericLight("skyLight", new BABYLON.Vector3(0, 1, 0), scene);
-                }
-                skyLight.intensity = 1.8;
-                skyLight.diffuse = new BABYLON.Color3(0.9, 0.95, 1.0); // Soft sky blue reflection
-                skyLight.groundColor = new BABYLON.Color3(0.25, 0.25, 0.25);
-
-                // Enable professional Tone Mapping and Sunny Exposure
-                scene.imageProcessingConfiguration.toneMappingEnabled = true;
-                scene.imageProcessingConfiguration.toneMappingType = BABYLON.ImageProcessingConfiguration.TONEMAPPING_ACES;
-                scene.imageProcessingConfiguration.exposure = 1.8; // Bright Eevee exposure boost
             },
             function (evt) {
-                // Loading progress
+                // Progress callback (optional)
             },
-            function (sceneError, message) {
-                console.error("Failed to load 3D Model:", message);
-                canvas.style.opacity = '1';
-
-                // Hide loading screen instantly on error
+            function (scene, message, exception) {
+                console.error("Error loading model in Babylon: ", message, exception);
+                
+                // Hide loading screen on error to prevent stuck state
                 const loadingIndicator = document.getElementById('lightbox-3d-loading');
                 if (loadingIndicator) {
-                    loadingIndicator.style.display = 'none';
-                }
-
-                // Show a helpful error message on screen (often CORS file:// protocol issue)
-                const caption = document.querySelector('.lightbox-caption');
-                if (caption) {
-                    caption.innerHTML = "Gagal memuat 3D Model. <br><small style='color: #E52E2E; font-size: 0.9rem;'>Gunakan Web Server lokal (seperti VS Code Live Server) untuk menghindari proteksi browser CORS (file://).</small>";
+                    loadingIndicator.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingIndicator.style.display = 'none';
+                    }, 500);
                 }
             }
         );
@@ -129,7 +113,7 @@ function init3DViewer(canvasId, modelUrl) {
 
     // 7. Run Render Loop
     babylonEngine.runRenderLoop(function () {
-        if (babylonScene && babylonScene.activeCamera) {
+        if (babylonScene) {
             babylonScene.render();
         }
     });

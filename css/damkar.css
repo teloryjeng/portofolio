@@ -1,4 +1,4 @@
-/* ATB Raya Project Detail Page Styles */
+/* Damkar Project Detail Page Styles */
 
 /* 1. Hero Section Styling */
 .project-detail-hero {
@@ -25,7 +25,6 @@
     object-fit: cover;
     object-position: center 68%;
     filter: brightness(0.45) contrast(1.1);
-    /* Linear gradient mask to fade the bottom of the hero into body */
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
 }
@@ -38,7 +37,8 @@
     height: 100%;
     z-index: 2;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: 6rem;
     padding-top: var(--header-height);
 }
 
@@ -88,7 +88,7 @@
 
 /* 2. Story Section Styling */
 .project-story-section {
-    padding: 6rem 0;
+    padding: 0rem 0;
     background-color: transparent;
 }
 
@@ -118,7 +118,7 @@
     display: flex;
     align-items: center;
     gap: 5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 8rem;
 }
 
 .story-row.reverse {
@@ -171,7 +171,6 @@
     transform: none;
 }
 
-/* Angular cutout shadow effect for a Persona 5 hand-cut paper look */
 .story-image-wrapper::after,
 .story-video-wrapper::after {
     content: '';
@@ -235,7 +234,6 @@
     font-weight: 500;
 }
 
-/* Row 3 Video Specifics */
 .story-video-wrapper {
     cursor: pointer;
 }
@@ -261,7 +259,6 @@
 
 .video-play-btn svg {
     margin-left: 4px;
-    /* Align play triangle visually */
     transition: transform 0.3s ease;
 }
 
@@ -320,12 +317,6 @@
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
-}
-
-.tool-logo.tool-ets {
-    height: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .tool-name {
@@ -408,10 +399,22 @@
     transition: border-color 0.3s ease;
 }
 
-
-
 .gallery-item:hover::after {
     border-color: var(--primary-color);
+}
+
+.gallery-item.gallery-item-centered {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16/9;
+}
+
+@media (max-width: 768px) {
+    .gallery-item.gallery-item-centered {
+        aspect-ratio: 4/3;
+    }
 }
 
 /* 5. Responsive Styling (Media Queries) */

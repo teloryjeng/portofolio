@@ -3,6 +3,8 @@
     const currentPath = window.location.pathname;
     const isAboutPage = currentPath.includes("about.html");
     const isProjectPage = currentPath.includes("project.html");
+    const isSubfolder = currentPath.includes("/projects/");
+    const prefix = isSubfolder ? "../" : "./";
 
     document.write(`
         <!-- Persona 5 Transition Overlay -->
@@ -24,17 +26,17 @@
 
         <header class="main-header">
             <div class="logo-container">
-                <a href="index.html" class="logo-link" aria-label="Home">
+                <a href="${prefix}index.html" class="logo-link" aria-label="Home">
                     <span class="logo-wrapper">
-                        <img src="assets/logo/sdefault.png" alt="Sururi Ardan Logo" class="logo-default">
-                        <img src="assets/logo/shover.png" alt="Sururi Ardan Logo Hover" class="logo-hover">
+                        <img src="${prefix}assets/logo/sdefault.png" alt="Sururi Ardan Logo" class="logo-default">
+                        <img src="${prefix}assets/logo/shover.png" alt="Sururi Ardan Logo Hover" class="logo-hover">
                     </span>
                 </a>
             </div>
             <nav class="nav-pill">
-                <a href="about.html" class="nav-link ${isAboutPage ? 'active' : ''}">ABOUT ME</a>
-                <a href="project.html" class="nav-link ${isProjectPage ? 'active' : ''}">MY PROJECT</a>
-                <a href="index.html#photography" class="nav-link">PHOTOGRAPHY SIDE</a>
+                <a href="${prefix}about.html" class="nav-link ${isAboutPage ? 'active' : ''}">ABOUT ME</a>
+                <a href="${prefix}project.html" class="nav-link ${isProjectPage ? 'active' : ''}">MY PROJECT</a>
+                <a href="${prefix}index.html#photography" class="nav-link">PHOTOGRAPHY SIDE</a>
             </nav>
             <div class="header-spacer"></div>
         </header>
