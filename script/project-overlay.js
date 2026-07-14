@@ -12,6 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
+    // Helper to play SFX dynamically
+    function playSfx(sfxName) {
+        if (isLowSpecDevice()) return;
+        const isSubfolder = window.location.pathname.includes("/projects/");
+        const prefix = isSubfolder ? "../" : "./";
+        const audio = new Audio(`${prefix}assets/sfx/${sfxName}`);
+        audio.playbackRate = 0.9 + Math.random() * 0.2; // Slight organic pitch variation
+        audio.play().catch(err => {
+            console.log("SFX autoplay blocked:", err);
+        });
+    }
+
     // 1. Mobile Warning & Performance Safeguard
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024;
     const mvs = document.querySelectorAll('model-viewer');
@@ -51,16 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         warningOverlay.classList.add('active');
 
-        // Play warning sound effect if not a low-spec device
-        if (!isLowSpecDevice()) {
-            const sfxPath = window.location.pathname.includes("/projects/")
-                ? "../assets/sfx/persona-5-notification.mp3"
-                : "./assets/sfx/persona-5-notification.mp3";
-            const warningSfx = new Audio(sfxPath);
-            warningSfx.play().catch(err => {
-                console.log("Audio autoplay blocked by browser policy:", err);
-            });
-        }
+        // Play warning sound effect
+        playSfx("persona-5-notification.mp3");
 
         const proceedBtn = document.getElementById('p5-warning-proceed');
         if (proceedBtn) {
@@ -162,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Show lightbox
                 lightbox.classList.add('active');
+                playSfx("deck_ui_show_modal.wav");
                 document.body.classList.add('p5-transition-active');
 
                 // Initialize Babylon 3D after a short delay to ensure DOM layout is complete
@@ -189,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Show lightbox
                 lightbox.classList.add('active');
+                playSfx("deck_ui_show_modal.wav");
                 document.body.classList.add('p5-transition-active');
             }
         });
@@ -197,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Close functions
     const closeLightbox = () => {
         lightbox.classList.remove('active');
+        playSfx("deck_ui_switch_toggle_off.wav");
         document.body.classList.remove('p5-transition-active');
 
         // Dispose 3D viewer to free memory
