@@ -58,8 +58,8 @@ body.p5-transition-active {
 }
 
 .p5-bg-cover {
-    left: -20%;
-    width: 140%;
+    left: -100%;
+    width: 300%;
     background-color: #0D0D0D;
     z-index: 5;
 }
@@ -76,7 +76,7 @@ body.p5-transition-active {
 .p5-loaded .p5-slash-2 { transform: skewX(-25deg) translateX(120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.22s; }
 .p5-loaded .p5-slash-3 { transform: skewX(-25deg) translateX(-120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.16s; }
 .p5-loaded .p5-slash-4 { transform: skewX(-25deg) translateX(120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.1s; }
-.p5-loaded .p5-bg-cover { transform: skewX(-25deg) translateX(-150vw); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0s; }
+.p5-loaded .p5-bg-cover { transform: skewX(-25deg) translateX(-350vw); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0s; }
 
 /* Loading Container in the Bottom Right */
 .p5-loading-container {
@@ -159,5 +159,69 @@ body.p5-transition-active {
     }
     66% {
         transform: rotate(calc(var(--rot) - 2.5deg)) scale(calc(var(--s) * 0.97)) translateY(calc(var(--ty) + 2px)) translateX(1px);
+    }
+}
+
+/* Mobile-specific page transition adjustments to prevent leaks on portrait screens */
+@media (max-width: 768px) {
+    .p5-slash {
+        top: -15vh;
+        height: 130vh;
+        /* Reduce skew to prevent extreme horizontal shifting on tall screens */
+        transform: skewX(-15deg) translateX(0);
+    }
+
+    .p5-slash-1 {
+        left: -30%;
+        width: 70%;
+    }
+
+    .p5-slash-2 {
+        right: -30%;
+        width: 60%;
+    }
+
+    .p5-slash-3 {
+        left: 10%;
+        width: 80%;
+    }
+
+    .p5-slash-4 {
+        right: 5%;
+        width: 75%;
+    }
+
+    .p5-bg-cover {
+        left: -100%;
+        width: 300%;
+    }
+
+    /* Slide-out animation coordinates for mobile (matching the smaller -15deg skew) */
+    .p5-loaded .p5-slash-1 { 
+        transform: skewX(-15deg) translateX(-150vw); 
+    }
+    .p5-loaded .p5-slash-2 { 
+        transform: skewX(-15deg) translateX(150vw); 
+    }
+    .p5-loaded .p5-slash-3 { 
+        transform: skewX(-15deg) translateX(-150vw); 
+    }
+    .p5-loaded .p5-slash-4 { 
+        transform: skewX(-15deg) translateX(150vw); 
+    }
+    .p5-loaded .p5-bg-cover { 
+        transform: skewX(-15deg) translateX(-350vw); 
+    }
+
+    /* Make loading text slightly smaller on mobile to fit screen bounds */
+    .p5-loading-container {
+        bottom: 6%;
+        right: 50%;
+        transform: translateX(50%); /* Center it horizontally on mobile */
+    }
+    
+    .p5-letter {
+        padding: 5px 10px;
+        font-size: 1.4rem !important; /* Force smaller size on mobile */
     }
 }

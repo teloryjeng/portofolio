@@ -18,7 +18,7 @@
                         <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" fill="#E52E2E" stroke="#000000" stroke-width="2"/>
                     </svg>
                 </div>
-                <div class="p5-loading-text" id="p5-loading-text">TAKE YOUR TIME</div>
+                <div class="p5-loading-text" id="p5-loading-text">LOADING</div>
             </div>
         </div>
 

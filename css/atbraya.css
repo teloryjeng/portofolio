@@ -552,3 +552,145 @@
     transform: rotate(-1deg);
     filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.5));
 }
+
+/* 6. Persona 5 Mobile Warning Overlay */
+.p5-warning-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(13, 13, 13, 0.98);
+    z-index: 1000000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.p5-warning-overlay.active {
+    display: flex;
+}
+
+.p5-warning-box {
+    position: relative;
+    max-width: 550px;
+    width: 100%;
+    border: 5px solid #000000;
+    box-shadow: 12px 12px 0px var(--primary-color);
+    background-color: #000000;
+    padding: 40px 30px 30px;
+    transform: rotate(-1.5deg);
+    color: var(--text-white);
+    text-align: center;
+}
+
+.p5-warning-accent {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    font-family: var(--font-hero-name);
+    font-size: 1.6rem;
+    font-weight: 900;
+    font-style: italic;
+    padding: 4px 20px;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    transform: rotate(-3deg);
+    letter-spacing: 0.1em;
+}
+
+.p5-warning-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.p5-warning-desc {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.p5-warning-desc strong {
+    color: var(--primary-color);
+}
+
+.p5-warning-suggestion {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #ffffff;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.p5-warning-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.p5-warn-btn {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 800;
+    padding: 10px 24px;
+    border: 3px solid #000000;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-proceed {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    box-shadow: 5px 5px 0px #000000;
+    transform: rotate(1deg);
+}
+
+.btn-proceed:hover {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    transform: scale(1.05) rotate(-1deg);
+}
+
+.btn-back {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 5px 5px 0px var(--primary-color);
+    transform: rotate(-1deg);
+}
+
+.btn-back:hover {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 5px 5px 0px #000000;
+}
+
+@media (max-width: 480px) {
+    .p5-warning-box {
+        padding: 35px 20px 20px;
+    }
+    .p5-warning-title {
+        font-size: 1.6rem;
+    }
+    .p5-warning-desc, .p5-warning-suggestion {
+        font-size: 0.95rem;
+    }
+    .p5-warn-btn {
+        width: 100%;
+    }
+}
