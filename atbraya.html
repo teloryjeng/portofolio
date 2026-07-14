@@ -277,6 +277,25 @@
         </section>
     </main>
 
+    <!-- Persona 5 Mobile Warning Overlay -->
+    <div id="p5-mobile-warning" class="p5-warning-overlay">
+        <div class="p5-warning-box">
+            <div class="p5-warning-accent">WARNING!</div>
+            <h2 class="p5-warning-title">BEBAN DATA SANGAT BERAT</h2>
+            <p class="p5-warning-desc">
+                Halaman ini memuat model 3D interaktif berukuran <strong>150MB+</strong>. 
+                Browser handphone Anda dapat mengalami force close (crash) karena keterbatasan memori RAM.
+            </p>
+            <p class="p5-warning-suggestion">
+                Disarankan untuk membuka halaman ini melalui <strong>Browser PC/Laptop</strong> untuk performa optimal.
+            </p>
+            <div class="p5-warning-buttons">
+                <button id="p5-warning-proceed" class="p5-warn-btn btn-proceed">LANJUTKAN SAJA</button>
+                <button id="p5-warning-back" class="p5-warn-btn btn-back">KEMBALI</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <script src="./script/footer.js"></script>
 
@@ -286,6 +305,42 @@
     <!-- Lightbox Preview Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Warning & Performance Safeguard
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024;
+            const warningOverlay = document.getElementById('p5-mobile-warning');
+            const mvs = document.querySelectorAll('model-viewer');
+
+            if (isMobile) {
+                // Instantly remove src to block 152MB download & browser crash before user accepts
+                mvs.forEach(mv => {
+                    mv.dataset.src = mv.getAttribute('src');
+                    mv.removeAttribute('src');
+                });
+
+                if (warningOverlay) {
+                    warningOverlay.classList.add('active');
+                    
+                    document.getElementById('p5-warning-proceed').addEventListener('click', () => {
+                        warningOverlay.classList.remove('active');
+                        // Restore src so it downloads ONLY when the user explicitly agrees
+                        mvs.forEach(mv => {
+                            if (mv.dataset.src) {
+                                mv.setAttribute('src', mv.dataset.src);
+                            }
+                        });
+                    });
+
+                    document.getElementById('p5-warning-back').addEventListener('click', () => {
+                        // Navigate back or to index
+                        if (document.referrer) {
+                            window.location.href = document.referrer;
+                        } else {
+                            window.location.href = './index.html';
+                        }
+                    });
+                }
+            }
+
             // 1. Create lightbox elements dynamically
             const lightbox = document.createElement('div');
             lightbox.id = 'p5-lightbox';
