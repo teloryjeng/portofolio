@@ -125,12 +125,20 @@
         flex: initial;
     }
 
+    .nav-pill {
+        margin-left: 1.5rem;
+    }
+
     .header-spacer {
         display: none;
     }
 }
 
 @media (max-width: 480px) {
+    .nav-pill {
+        margin-left: 0.5rem;
+    }
+
     .nav-link {
         padding: 6px 14px;
         font-size: 0.7rem;

@@ -38,6 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         warningOverlay.classList.add('active');
 
+        // Play warning sound effect
+        const sfxPath = window.location.pathname.includes("/projects/")
+            ? "../assets/sfx/persona-5-notification.mp3"
+            : "./assets/sfx/persona-5-notification.mp3";
+        const warningSfx = new Audio(sfxPath);
+        warningSfx.play().catch(err => {
+            console.log("Audio autoplay blocked by browser policy:", err);
+        });
+
         const proceedBtn = document.getElementById('p5-warning-proceed');
         if (proceedBtn) {
             proceedBtn.addEventListener('click', () => {

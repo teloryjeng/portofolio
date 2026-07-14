@@ -83,6 +83,21 @@
         // Ensure transition stays visible for at least minLoadDuration to look amazing
         setTimeout(() => {
             overlay.classList.add('p5-loaded');
+
+            // Play exit transition sound effect (randomly select one)
+            const prefix = window.location.pathname.includes("/projects/") ? "../" : "./";
+            const exitSfxs = [
+                "deck_ui_side_menu_fly_out.wav",
+                "deck_ui_hide_modal.wav"
+            ];
+            const selectedExit = exitSfxs[Math.floor(Math.random() * exitSfxs.length)];
+            const flyOutSfx = new Audio(`${prefix}assets/sfx/${selectedExit}`);
+            // Randomize playback rate slightly (between 0.85 and 1.15) for pitch variation
+            flyOutSfx.playbackRate = 0.85 + Math.random() * 0.3;
+            flyOutSfx.play().catch(err => {
+                console.log("SFX autoplay blocked:", err);
+            });
+
             // Restore scrolling
             if (document.body) document.body.classList.remove('p5-transition-active');
         }, remainingTime);
@@ -142,6 +157,21 @@
                 if (document.body) document.body.classList.add('p5-transition-active');
 
                 overlay.classList.remove('p5-loaded');
+
+                // Play entrance transition sound effect (randomly select one)
+                const prefix = window.location.pathname.includes("/projects/") ? "../" : "./";
+                const entranceSfxs = [
+                    "deck_ui_side_menu_fly_in.wav",
+                    "deck_ui_launch_game.wav",
+                    "deck_ui_default_activation.wav"
+                ];
+                const selectedEntrance = entranceSfxs[Math.floor(Math.random() * entranceSfxs.length)];
+                const flyInSfx = new Audio(`${prefix}assets/sfx/${selectedEntrance}`);
+                // Randomize playback rate slightly (between 0.85 and 1.15) for pitch variation
+                flyInSfx.playbackRate = 0.85 + Math.random() * 0.3;
+                flyInSfx.play().catch(err => {
+                    console.log("SFX autoplay blocked:", err);
+                });
 
                 // Navigate to the target page after the slashes finish sliding in
                 setTimeout(() => {
