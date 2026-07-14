@@ -213,11 +213,15 @@ body.p5-transition-active {
         transform: skewX(-15deg) translateX(-350vw); 
     }
 
-    /* Make loading text slightly smaller on mobile to fit screen bounds */
+    /* Center the loading text and star spinner perfectly on mobile */
     .p5-loading-container {
-        bottom: 6%;
-        right: 50%;
-        transform: translateX(50%); /* Center it horizontally on mobile */
+        bottom: auto;
+        right: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        flex-direction: column; /* Stack star and text vertically */
+        gap: 15px;
     }
     
     .p5-letter {
