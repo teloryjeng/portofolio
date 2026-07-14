@@ -258,16 +258,18 @@
     font-size: clamp(1.8rem, 4.5vw, 3rem);
     color: #018CF8;
     filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
-    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #FFF;
+    paint-order: stroke fill;
 }
 
 .desc-virtucare {
     font-size: clamp(1rem, 2vw, 1.2rem);
     color: #018CF8;
     filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
-    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #FFF;
+    paint-order: stroke fill;
 }
 
 .title-nasihat {

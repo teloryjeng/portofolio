@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Helper to detect low-spec or slow network devices
+    function isLowSpecDevice() {
+        // Detect slow network connection or Data Saver enabled
+        if (navigator.connection) {
+            if (navigator.connection.saveData) return true;
+            const slowConnections = ['slow-2g', '2g', '3g'];
+            if (slowConnections.includes(navigator.connection.effectiveType)) return true;
+        }
+        if (navigator.deviceMemory && navigator.deviceMemory < 4) return true;
+        if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return true;
+        return false;
+    }
+
     // 1. Mobile Warning & Performance Safeguard
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024;
     const mvs = document.querySelectorAll('model-viewer');
@@ -38,14 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         warningOverlay.classList.add('active');
 
-        // Play warning sound effect
-        const sfxPath = window.location.pathname.includes("/projects/")
-            ? "../assets/sfx/persona-5-notification.mp3"
-            : "./assets/sfx/persona-5-notification.mp3";
-        const warningSfx = new Audio(sfxPath);
-        warningSfx.play().catch(err => {
-            console.log("Audio autoplay blocked by browser policy:", err);
-        });
+        // Play warning sound effect if not a low-spec device
+        if (!isLowSpecDevice()) {
+            const sfxPath = window.location.pathname.includes("/projects/")
+                ? "../assets/sfx/persona-5-notification.mp3"
+                : "./assets/sfx/persona-5-notification.mp3";
+            const warningSfx = new Audio(sfxPath);
+            warningSfx.play().catch(err => {
+                console.log("Audio autoplay blocked by browser policy:", err);
+            });
+        }
 
         const proceedBtn = document.getElementById('p5-warning-proceed');
         if (proceedBtn) {

@@ -249,8 +249,9 @@
     font-size: clamp(2rem, 5vw, 3.2rem);
     color: #018CF8;
     filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
-    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #FFF;
+    paint-order: stroke fill;
 }
 
 .desc-virtucare {
@@ -258,8 +259,9 @@
     color: #018CF8;
     margin-top: -0.7rem;
     filter: drop-shadow(-2px 7px 1px rgba(0, 0, 0, 0.31));
-    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #FFF;
+    paint-order: stroke fill;
 }
 
 /* Nasihat Maut Specific Sizing */
