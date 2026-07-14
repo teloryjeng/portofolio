@@ -9,6 +9,8 @@
     --text-muted: #8E8E93;
     --text-dark-grey: #1C1C1E;
 
+    --bg-image-opacity: 0.03;
+
     --font-hero-name: 'Racing Sans One', sans-serif;
     --font-alumni: 'Alumni Sans', sans-serif;
     --font-antic: 'Antic Didone', serif;
@@ -38,10 +40,27 @@ html {
 }
 
 body {
+    position: relative;
     overflow-x: hidden;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-weight: 500;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/img/background2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    opacity: var(--bg-image-opacity);
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Image protection against direct Save As and Drag & Drop */
@@ -170,7 +189,7 @@ img {
 .collaborate-section {
     padding: 5rem 0;
     text-align: center;
-    background-color: var(--bg-color);
+    background-color: transparent;
 }
 
 .collaborate-tagline {
