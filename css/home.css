@@ -39,9 +39,17 @@
     object-fit: cover;
     filter: brightness(0.95);
 
-    /* Smooth radial mask to fade all 4 edges into the background */
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 98%);
-    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 98%);
+    /* Soft blend vignette mask on left, right, and bottom */
+    -webkit-mask-image: 
+        linear-gradient(to left, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(to right, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: 
+        linear-gradient(to left, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(to right, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
+    mask-composite: intersect;
 }
 
 .hero-text-col {
@@ -78,7 +86,7 @@
     padding: clamp(5rem, 12vw, 10rem) 0;
     display: flex;
     justify-content: center;
-    background-color: var(--bg-color);
+    background-color: transparent;
 }
 
 .about-description {
@@ -97,7 +105,7 @@
 /* Projects Section */
 .projects-section {
     padding: 0 0;
-    background-color: var(--bg-color);
+    background-color: transparent;
     text-align: center;
 }
 
