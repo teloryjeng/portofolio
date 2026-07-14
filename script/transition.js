@@ -18,6 +18,55 @@
         return false;
     }
 
+    // Cache for Web Audio API to bypass IDM interception
+    let audioCtx = null;
+    const audioBuffers = {};
+
+    // Helper to play SFX dynamically using Web Audio API to bypass IDM
+    function playSfx(sfxName) {
+        if (isLowSpecDevice()) return;
+        
+        try {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const isSubfolder = window.location.pathname.includes("/projects/");
+            const prefix = isSubfolder ? "../" : "./";
+            const url = `${prefix}assets/sfx/${sfxName}`;
+
+            if (audioBuffers[url]) {
+                playBuffer(audioBuffers[url]);
+            } else {
+                fetch(url)
+                    .then(response => response.arrayBuffer())
+                    .then(arrayBuffer => audioCtx.decodeAudioData(arrayBuffer))
+                    .then(audioBuffer => {
+                        audioBuffers[url] = audioBuffer;
+                        playBuffer(audioBuffer);
+                    })
+                    .catch(err => console.log("Audio fetch/decode failed:", err));
+            }
+        } catch (e) {
+            console.log("Web Audio API not supported, falling back:", e);
+            // Fallback to standard Audio if Web Audio API fails
+            const isSubfolder = window.location.pathname.includes("/projects/");
+            const prefix = isSubfolder ? "../" : "./";
+            const audio = new Audio(`${prefix}assets/sfx/${sfxName}`);
+            audio.play().catch(err => console.log("Fallback SFX blocked:", err));
+        }
+
+        function playBuffer(buffer) {
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(audioCtx.destination);
+            source.start(0);
+        }
+    }
+
     // 1. Generate Cutout Letters dynamically
     function initLetters() {
         const textContainer = document.getElementById('p5-loading-text');
@@ -97,21 +146,13 @@
         setTimeout(() => {
             overlay.classList.add('p5-loaded');
 
-            // Play exit transition sound effect if not a low-spec device
-            if (!isLowSpecDevice()) {
-                const prefix = window.location.pathname.includes("/projects/") ? "../" : "./";
-                const exitSfxs = [
-                    "deck_ui_side_menu_fly_out.wav",
-                    "deck_ui_hide_modal.wav"
-                ];
-                const selectedExit = exitSfxs[Math.floor(Math.random() * exitSfxs.length)];
-                const flyOutSfx = new Audio(`${prefix}assets/sfx/${selectedExit}`);
-                // Randomize playback rate slightly (between 0.85 and 1.15) for pitch variation
-                flyOutSfx.playbackRate = 0.85 + Math.random() * 0.3;
-                flyOutSfx.play().catch(err => {
-                    console.log("SFX autoplay blocked:", err);
-                });
-            }
+            // Play exit transition sound effect
+            const exitSfxs = [
+                "deck_ui_side_menu_fly_out.dat",
+                "deck_ui_hide_modal.dat"
+            ];
+            const selectedExit = exitSfxs[Math.floor(Math.random() * exitSfxs.length)];
+            playSfx(selectedExit);
 
             // Restore scrolling
             if (document.body) document.body.classList.remove('p5-transition-active');
@@ -173,22 +214,14 @@
 
                 overlay.classList.remove('p5-loaded');
 
-                // Play entrance transition sound effect if not a low-spec device
-                if (!isLowSpecDevice()) {
-                    const prefix = window.location.pathname.includes("/projects/") ? "../" : "./";
-                    const entranceSfxs = [
-                        "deck_ui_side_menu_fly_in.wav",
-                        "deck_ui_launch_game.wav",
-                        "deck_ui_default_activation.wav"
-                    ];
-                    const selectedEntrance = entranceSfxs[Math.floor(Math.random() * entranceSfxs.length)];
-                    const flyInSfx = new Audio(`${prefix}assets/sfx/${selectedEntrance}`);
-                    // Randomize playback rate slightly (between 0.85 and 1.15) for pitch variation
-                    flyInSfx.playbackRate = 0.85 + Math.random() * 0.3;
-                    flyInSfx.play().catch(err => {
-                        console.log("SFX autoplay blocked:", err);
-                    });
-                }
+                // Play entrance transition sound effect
+                const entranceSfxs = [
+                    "deck_ui_side_menu_fly_in.dat",
+                    "deck_ui_launch_game.dat",
+                    "deck_ui_default_activation.dat"
+                ];
+                const selectedEntrance = entranceSfxs[Math.floor(Math.random() * entranceSfxs.length)];
+                playSfx(selectedEntrance);
 
                 // Navigate to the target page after the slashes finish sliding in
                 setTimeout(() => {

@@ -12,16 +12,53 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
-    // Helper to play SFX dynamically
+    // Cache for Web Audio API to bypass IDM interception
+    let audioCtx = null;
+    const audioBuffers = {};
+
+    // Helper to play SFX dynamically using Web Audio API to bypass IDM
     function playSfx(sfxName) {
         if (isLowSpecDevice()) return;
-        const isSubfolder = window.location.pathname.includes("/projects/");
-        const prefix = isSubfolder ? "../" : "./";
-        const audio = new Audio(`${prefix}assets/sfx/${sfxName}`);
-        audio.playbackRate = 0.9 + Math.random() * 0.2; // Slight organic pitch variation
-        audio.play().catch(err => {
-            console.log("SFX autoplay blocked:", err);
-        });
+        
+        try {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const isSubfolder = window.location.pathname.includes("/projects/");
+            const prefix = isSubfolder ? "../" : "./";
+            const url = `${prefix}assets/sfx/${sfxName}`;
+
+            if (audioBuffers[url]) {
+                playBuffer(audioBuffers[url]);
+            } else {
+                fetch(url)
+                    .then(response => response.arrayBuffer())
+                    .then(arrayBuffer => audioCtx.decodeAudioData(arrayBuffer))
+                    .then(audioBuffer => {
+                        audioBuffers[url] = audioBuffer;
+                        playBuffer(audioBuffer);
+                    })
+                    .catch(err => console.log("Audio fetch/decode failed:", err));
+            }
+        } catch (e) {
+            console.log("Web Audio API not supported, falling back:", e);
+            // Fallback to standard Audio if Web Audio API fails
+            const isSubfolder = window.location.pathname.includes("/projects/");
+            const prefix = isSubfolder ? "../" : "./";
+            const audio = new Audio(`${prefix}assets/sfx/${sfxName}`);
+            audio.play().catch(err => console.log("Fallback SFX blocked:", err));
+        }
+
+        function playBuffer(buffer) {
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(audioCtx.destination);
+            source.start(0);
+        }
     }
 
     // 1. Mobile Warning & Performance Safeguard
@@ -64,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         warningOverlay.classList.add('active');
 
         // Play warning sound effect
-        playSfx("persona-5-notification.mp3");
+        playSfx("persona-5-notification.dat");
 
         const proceedBtn = document.getElementById('p5-warning-proceed');
         if (proceedBtn) {
@@ -166,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Show lightbox
                 lightbox.classList.add('active');
-                playSfx("deck_ui_show_modal.wav");
+                playSfx("deck_ui_show_modal.dat");
                 document.body.classList.add('p5-transition-active');
 
                 // Initialize Babylon 3D after a short delay to ensure DOM layout is complete
@@ -194,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Show lightbox
                 lightbox.classList.add('active');
-                playSfx("deck_ui_show_modal.wav");
+                playSfx("deck_ui_show_modal.dat");
                 document.body.classList.add('p5-transition-active');
             }
         });
@@ -203,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Close functions
     const closeLightbox = () => {
         lightbox.classList.remove('active');
-        playSfx("deck_ui_switch_toggle_off.wav");
+        playSfx("deck_ui_switch_toggle_off.dat");
         document.body.classList.remove('p5-transition-active');
 
         // Dispose 3D viewer to free memory
