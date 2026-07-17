@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth Scroll for Navigation and Buttons
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 // Header offset
@@ -44,22 +44,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const fadeElements = document.querySelectorAll(
         '.project-card, .about-description, .collaborate-title, .collaborate-subtitle, .about-main-desc, .story-row, .project-quote'
     );
-    
+
     // Add CSS initial state class and observe
     fadeElements.forEach(el => {
         el.classList.add('fade-in-element');
         scrollObserver.observe(el);
     });
 
-    // Image Protection: Prevent right-click menu and dragging on all images
+    // Security Protection: Prevent right-click, copying, cutting, dragging, and developer tools
+    // 1. Prevent right-click context menu globally
     document.addEventListener('contextmenu', (e) => {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
+        e.preventDefault();
     });
 
+    // 2. Prevent text copying and cutting
+    document.addEventListener('copy', (e) => {
+        e.preventDefault();
+    });
+    document.addEventListener('cut', (e) => {
+        e.preventDefault();
+    });
+
+    // 3. Prevent dragging of images and text
     document.addEventListener('dragstart', (e) => {
-        if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+    });
+
+    // 4. Block common developer tools shortcut keys (F12, Ctrl+C, Ctrl+X, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J)
+    document.addEventListener('keydown', (e) => {
+        // Block Ctrl+C and Ctrl+X (Copy & Cut)
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x')) {
+            e.preventDefault();
+        }
+        // Block Ctrl+U (View Source)
+        if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+            e.preventDefault();
+        }
+        // Block F12 (Developer Tools)
+        /*if (e.key === 'F12') {
+            e.preventDefault();
+        }*/
+        // Block Ctrl+Shift+I / Cmd+Opt+I (Developer Tools)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+            e.preventDefault();
+        }
+        // Block Ctrl+Shift+J / Cmd+Opt+J (Console)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
             e.preventDefault();
         }
     });

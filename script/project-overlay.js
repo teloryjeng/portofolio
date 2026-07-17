@@ -17,14 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioBuffers = {};
 
     // Helper to play SFX dynamically using Web Audio API to bypass IDM
-    function playSfx(sfxName) {
+    function playSfx(sfxName, isInteractive = false) {
         if (isLowSpecDevice()) return;
         
         try {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
+            
             if (audioCtx.state === 'suspended') {
+                if (!isInteractive) {
+                    console.log("AudioContext is suspended and not interactive. Skipping SFX:", sfxName);
+                    return;
+                }
                 audioCtx.resume();
             }
 
@@ -46,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {
             console.log("Web Audio API not supported, falling back:", e);
+            if (!isInteractive) return;
             // Fallback to standard Audio if Web Audio API fails
             const isSubfolder = window.location.pathname.includes("/projects/");
             const prefix = isSubfolder ? "../" : "./";
@@ -101,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         warningOverlay.classList.add('active');
 
         // Play warning sound effect
-        playSfx("persona-5-notification.dat");
+        playSfx("persona-5-notification.dat", false);
 
         const proceedBtn = document.getElementById('p5-warning-proceed');
         if (proceedBtn) {
@@ -203,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Show lightbox
                 lightbox.classList.add('active');
-                playSfx("deck_ui_show_modal.dat");
+                playSfx("deck_ui_show_modal.dat", true);
                 document.body.classList.add('p5-transition-active');
 
                 // Initialize Babylon 3D after a short delay to ensure DOM layout is complete
@@ -231,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Show lightbox
                 lightbox.classList.add('active');
-                playSfx("deck_ui_show_modal.dat");
+                playSfx("deck_ui_show_modal.dat", true);
                 document.body.classList.add('p5-transition-active');
             }
         });
@@ -240,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Close functions
     const closeLightbox = () => {
         lightbox.classList.remove('active');
-        playSfx("deck_ui_switch_toggle_off.dat");
+        playSfx("deck_ui_switch_toggle_off.dat", true);
         document.body.classList.remove('p5-transition-active');
 
         // Dispose 3D viewer to free memory

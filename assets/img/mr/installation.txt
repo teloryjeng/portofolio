@@ -1,0 +1,19 @@
+Manifest: This was mod was created by Max Hardy from "Hardy's Mods".
+Please respect my intellectual property and dont send it to other people.
+Thank u.
+
+Installation:
+
+Link: https://mega.nz/folder/TNkihTbQ
+Password key: GgYWdO3DYto6GXupOJxIQg
+
+
+Download the whole chase camera folder. Then copy the folder and paste it into AC's "chaser-camera" folder. U can find the folder here:
+
+- SSD - SteamLibrary - steamapps - common - assettcorsa - extension - lua - 
+>>>>>- chaser-camera -<<<<<
+
+U can also go into contend manager - custom shaders patch - extension - 
+>>>- chaser camera -<<< and then "left click" on one of the scripts and then "right click" and then "view in explorer". Ur now in the chaser camera folder where u can just paste in the new script. 
+
+Enjoy :) 

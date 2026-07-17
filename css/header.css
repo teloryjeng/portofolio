@@ -131,16 +131,57 @@
 }
 
 .p5-nav-btn .btn-text {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
 }
 
 .p5-nav-btn .btn-icon {
     display: none;
 }
 
+/* Individual letter base state */
+.p5-nav-btn .p5-btn-letter {
+    display: inline-block;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    color: inherit;
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 2px 0px;
+    margin: 0;
+    box-shadow: none;
+    filter: none;
+    transform: none;
+}
+
+.p5-nav-btn .p5-btn-space {
+    width: 0.35em;
+    display: inline-block;
+}
+
+/* Hover state: convert to stop-motion collage letters like transition loading */
+.p5-nav-btn:hover .p5-btn-letter {
+    padding: 3px 6px;
+    margin: 0 1px;
+    font-family: 'Racing Sans One', 'Impact', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 900;
+    font-style: italic;
+    background-color: var(--bg);
+    color: var(--fg);
+    border: 2px solid #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.95));
+    animation: p5-letter-jitter 0.35s step-end infinite;
+    clip-path: polygon(2% 2%, 98% 3%, 95% 97%, 3% 94%);
+}
+
 .p5-nav-btn:hover {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #0d0d0d;
     box-shadow: 4px 4px 0px var(--primary-color);
     transform: scale(1.05) rotate(1deg) skewX(-10deg);
 }
@@ -192,6 +233,18 @@
         justify-content: center;
         color: inherit;
     }
+
+    .p5-nav-btn:hover {
+        background-color: #ffffff;
+        color: #000000;
+        border: 3px solid #000000;
+        box-shadow: 4px 4px 0px var(--primary-color);
+        animation: p5-letter-jitter 0.35s step-end infinite;
+        --rot: -3deg;
+        --s: 1.05;
+        --ty: 0px;
+        clip-path: polygon(2% 4%, 97% 2%, 96% 95%, 4% 96%);
+    }
 }
 
 @media (max-width: 480px) {
@@ -209,6 +262,11 @@
         height: 32px;
         border: 2px solid #000000;
         box-shadow: 3px 3px 0px #000000;
+    }
+
+    .p5-nav-btn:hover {
+        border-width: 2px;
+        box-shadow: 3px 3px 0px var(--primary-color);
     }
 
     .p5-nav-btn .btn-icon svg {

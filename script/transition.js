@@ -21,16 +21,22 @@
     // Cache for Web Audio API to bypass IDM interception
     let audioCtx = null;
     const audioBuffers = {};
+    let isTransitioning = false;
 
     // Helper to play SFX dynamically using Web Audio API to bypass IDM
-    function playSfx(sfxName) {
+    function playSfx(sfxName, isInteractive = false) {
         if (isLowSpecDevice()) return;
         
         try {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
+            
             if (audioCtx.state === 'suspended') {
+                if (!isInteractive) {
+                    console.log("AudioContext is suspended and not interactive. Skipping SFX:", sfxName);
+                    return;
+                }
                 audioCtx.resume();
             }
 
@@ -52,6 +58,7 @@
             }
         } catch (e) {
             console.log("Web Audio API not supported, falling back:", e);
+            if (!isInteractive) return;
             // Fallback to standard Audio if Web Audio API fails
             const isSubfolder = window.location.pathname.includes("/projects/");
             const prefix = isSubfolder ? "../" : "./";
@@ -152,7 +159,7 @@
                 "deck_ui_hide_modal.dat"
             ];
             const selectedExit = exitSfxs[Math.floor(Math.random() * exitSfxs.length)];
-            playSfx(selectedExit);
+            playSfx(selectedExit, false);
 
             // Restore scrolling
             if (document.body) document.body.classList.remove('p5-transition-active');
@@ -205,8 +212,14 @@
                 return;
             }
 
+            if (isTransitioning) {
+                e.preventDefault();
+                return;
+            }
+
             // Play transition
             e.preventDefault();
+            isTransitioning = true;
             const overlay = document.getElementById('p5-transition-overlay');
             if (overlay) {
                 // Block scrolling during transition
@@ -221,7 +234,7 @@
                     "deck_ui_default_activation.dat"
                 ];
                 const selectedEntrance = entranceSfxs[Math.floor(Math.random() * entranceSfxs.length)];
-                playSfx(selectedEntrance);
+                playSfx(selectedEntrance, true);
 
                 // Navigate to the target page after the slashes finish sliding in
                 setTimeout(() => {
@@ -235,6 +248,7 @@
 
     // Listen to pageshow to handle bfcache (back-forward cache) restores when navigating back
     window.addEventListener('pageshow', function (event) {
+        isTransitioning = false;
         if (event.persisted) {
             const overlay = document.getElementById('p5-transition-overlay');
             if (overlay) {

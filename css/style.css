@@ -45,6 +45,11 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-weight: 500;
+    
+    /* Prevent text selection */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none;     /* IE 10 and older */
+    user-select: none;         /* Standard syntax */
 }
 
 body::before {
