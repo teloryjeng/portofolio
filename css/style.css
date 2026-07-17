@@ -45,11 +45,14 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-weight: 500;
-    
+
     /* Prevent text selection */
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none;     /* IE 10 and older */
-    user-select: none;         /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and older */
+    user-select: none;
+    /* Standard syntax */
 }
 
 body::before {
@@ -59,13 +62,22 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/img/background2.png');
-    background-size: cover;
-    background-position: center;
+    background-image: url('../assets/img/background2.webp');
     background-repeat: repeat;
+    background-size: 768px 512px; /* Matches the 1536x1024 (3:2) aspect ratio perfectly */
     opacity: var(--bg-image-opacity);
     z-index: -1;
     pointer-events: none;
+    animation: p5-bg-scroll 25s linear infinite;
+}
+
+@keyframes p5-bg-scroll {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 768px 512px; /* Seamless diagonal scroll matching the tile size */
+    }
 }
 
 /* Image protection against direct Save As and Drag & Drop */

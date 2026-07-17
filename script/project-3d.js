@@ -58,6 +58,7 @@ function init3DViewer(canvasId, modelUrl) {
                 const camera = scene.activeCamera;
                 if (camera) {
                     camera.attachControl(canvas, true);
+                    camera.alpha = Math.PI; // Start camera rotation from -X axis (looking along +X)
                     camera.useAutoRotationBehavior = true;
                     if (camera.autoRotationBehavior) {
                         camera.autoRotationBehavior.idleRotationSpeed = 0.2;
@@ -77,24 +78,23 @@ function init3DViewer(canvasId, modelUrl) {
 
                 // 6. Enhance Lighting
                 const envTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(
-                    "https://assets.babylonjs.com/environments/environmentSpecular.env", 
+                    "https://assets.babylonjs.com/environments/environmentSpecular.env",
                     scene
                 );
                 scene.environmentTexture = envTexture;
-                scene.environmentIntensity = 0.5; // Soften environment reflections (down from 2.5)
+                scene.environmentIntensity = 1; // High quality PBR reflections (up from 0.5)
 
-                // Configure standard lights
-                const dirLight = scene.getLightByName("default light");
-                if (dirLight) {
-                    dirLight.intensity = 0.8; // Lower light intensity (down from 2.5)
-                }
+                // Configure all lights in the scene for a bright, professional look
+                scene.lights.forEach(light => {
+                    light.intensity = 1.2; // Up from 0.8
+                });
             },
             function (evt) {
                 // Progress callback (optional)
             },
             function (scene, message, exception) {
                 console.error("Error loading model in Babylon: ", message, exception);
-                
+
                 // Hide loading screen on error to prevent stuck state
                 const loadingIndicator = document.getElementById('lightbox-3d-loading');
                 if (loadingIndicator) {
