@@ -6,7 +6,7 @@
     /* Red accent */
     --primary-hover: linear-gradient(to right, #DA291C, #78111C);
     --text-white: #FFFFFF;
-    --text-muted: #8E8E93;
+    --text-muted: #bebecb;
     --text-dark-grey: #1C1C1E;
 
     --bg-image-opacity: 0.03;
@@ -64,7 +64,8 @@ body::before {
     height: 100%;
     background-image: url('../assets/img/background2.webp');
     background-repeat: repeat;
-    background-size: 768px 512px; /* Matches the 1536x1024 (3:2) aspect ratio perfectly */
+    background-size: 768px 512px;
+    /* Matches the 1536x1024 (3:2) aspect ratio perfectly */
     opacity: var(--bg-image-opacity);
     z-index: -1;
     pointer-events: none;
@@ -75,8 +76,10 @@ body::before {
     from {
         background-position: 0 0;
     }
+
     to {
-        background-position: 768px 512px; /* Seamless diagonal scroll matching the tile size */
+        background-position: 768px 512px;
+        /* Seamless diagonal scroll matching the tile size */
     }
 }
 

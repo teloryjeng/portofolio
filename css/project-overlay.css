@@ -26,7 +26,7 @@
 .lightbox-wrapper {
     position: relative;
     max-width: 90vw;
-    max-height: 80vh;
+    max-height: 62vh;
     border: 4px solid #000000;
     box-shadow: 12px 12px 0px var(--primary-color);
     background-color: #000000;
@@ -34,13 +34,11 @@
     /* Default / Closed State (Exit animation) */
     transform: scale(0.8, 0.05) rotate(4deg) translateY(-20px);
     opacity: 0;
-    filter: blur(10px);
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, filter 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
 }
 
 #p5-lightbox.active .lightbox-wrapper {
     opacity: 1;
-    filter: blur(0px);
     transform: scale(1) rotate(0deg);
     /* Play P5 style elastic pop entrance */
     animation: p5-wrapper-entrance 0.55s cubic-bezier(0.25, 1.25, 0.5, 1) backwards;
@@ -49,14 +47,31 @@
 .lightbox-content {
     display: block;
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 62vh;
     object-fit: contain;
+}
+
+.lightbox-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease-in-out;
+    z-index: 5;
+}
+
+.lightbox-image-overlay.active {
+    opacity: 1;
 }
 
 .lightbox-close {
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: 30px;
+    right: 30px;
     background-color: var(--primary-color);
     color: var(--text-white);
     border: 3px solid #000000;
@@ -71,8 +86,10 @@
     justify-content: center;
     cursor: pointer;
     box-shadow: 4px 4px 0px #000000;
-    transform: rotate(5deg);
-    transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+    --base-transform: scale(1);
+    --base-rot: 5deg;
+    transform: var(--base-transform) rotate(var(--base-rot));
+    transition: background-color 0.2s ease, opacity 0.2s ease;
     z-index: 1000010;
     
     /* Default / Closed State */
@@ -84,17 +101,27 @@
     animation: p5-close-entrance 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s backwards;
 }
 
-.lightbox-close:hover {
-    transform: scale(1.1) rotate(-5deg);
+#p5-lightbox.active .lightbox-close.entrance-done {
+    animation: none;
+}
+
+#p5-lightbox.active .lightbox-close:hover,
+#p5-lightbox.active .lightbox-close.entrance-done:hover {
     background-color: #ffffff;
     color: var(--primary-color);
+    box-shadow: 6px 6px 0px #000000;
+    animation: p5-button-jitter 0.35s step-end infinite;
 }
 
 .lightbox-caption {
+    --caption-rot: -1deg;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--caption-rot));
     font-family: var(--font-heading);
     font-size: 1.5rem;
     color: var(--text-white);
-    margin-top: 1.5rem;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -102,8 +129,8 @@
     padding: 6px 20px;
     border: 2px solid #000000;
     box-shadow: 4px 4px 0px var(--primary-color);
-    transform: rotate(-1deg);
     filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.5));
+    z-index: 1000010;
     
     /* Default / Closed State */
     opacity: 0;
@@ -417,13 +444,11 @@
     0% {
         transform: scale(0.5, 0.05) rotate(-10deg) translateY(100px);
         opacity: 0;
-        filter: blur(15px);
         box-shadow: 0 0 0px rgba(229, 46, 46, 0), 0px 0px 0px var(--primary-color);
     }
     50% {
         transform: scale(1.06, 0.95) rotate(2deg) translateY(-10px);
         opacity: 0.8;
-        filter: blur(2px);
         box-shadow: 0 0 40px rgba(229, 46, 46, 0.8), 20px 20px 0px var(--primary-color);
     }
     75% {
@@ -433,7 +458,6 @@
     100% {
         transform: scale(1) rotate(0deg) translateY(0);
         opacity: 1;
-        filter: blur(0px);
         box-shadow: 0 0 25px rgba(229, 46, 46, 0.4), 12px 12px 0px var(--primary-color);
     }
 }
@@ -451,11 +475,243 @@
 
 @keyframes p5-caption-entrance {
     0% {
-        transform: translateY(30px) skewX(10deg) rotate(-1deg);
+        transform: translateX(-50%) translateY(30px) skewX(10deg) rotate(var(--caption-rot, -1deg));
         opacity: 0;
     }
     100% {
-        transform: translateY(0) skewX(0deg) rotate(-1deg);
+        transform: translateX(-50%) translateY(0) skewX(0deg) rotate(var(--caption-rot, -1deg));
         opacity: 1;
     }
 }
+
+/* 6. Lightbox Carousel Navigation & Thumbnails */
+.lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    font-size: 2.5rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    z-index: 1000015;
+    user-select: none;
+}
+
+.lightbox-arrow-left {
+    left: 40px;
+    --base-transform: translateY(-50%);
+    --base-rot: 3deg;
+    transform: var(--base-transform) rotate(var(--base-rot));
+}
+
+.lightbox-arrow-right {
+    right: 40px;
+    --base-transform: translateY(-50%);
+    --base-rot: -3deg;
+    transform: var(--base-transform) rotate(var(--base-rot));
+}
+
+.lightbox-arrow:hover {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    box-shadow: 6px 6px 0px #000000;
+    animation: p5-button-jitter 0.35s step-end infinite;
+}
+
+.lightbox-arrow:active {
+    transform: var(--base-transform) rotate(var(--base-rot)) scale(0.95);
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.lightbox-thumbnails-container {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 95px;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 8px 0;
+    border-top: 2px dashed rgba(255, 255, 255, 0.15);
+    scrollbar-width: auto;
+    scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    z-index: 1000010;
+    pointer-events: auto;
+}
+
+.lightbox-thumbnails-container::-webkit-scrollbar {
+    height: 8px;
+    display: block;
+}
+
+.lightbox-thumbnails-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.lightbox-thumbnails-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+    border: 1px solid #000000;
+}
+
+.lightbox-thumbnails-container::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+.lightbox-thumbnails-track {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    padding: 0 40px;
+    width: max-content;
+    height: 60px;
+    align-items: center;
+}
+
+.lightbox-thumbnail-wrapper {
+    position: relative;
+    width: 80px;
+    height: 55px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 2;
+}
+
+.lightbox-thumbnail-wrapper:hover {
+    transform: scale(1.08) rotate(1.5deg);
+}
+
+/* Jagged red paper backing cutout */
+.lightbox-thumbnail-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    z-index: -1;
+    transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.25s ease;
+    opacity: 0;
+    transform: rotate(0deg) scale(0.9);
+}
+
+/* Black outline border paper */
+.lightbox-thumbnail-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    border: 2px solid #000000;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.lightbox-thumbnail-wrapper.active::before {
+    opacity: 1;
+    transform: rotate(5deg) translate(4px, 4px) scale(1.02);
+    clip-path: polygon(1% 3%, 99% 1%, 96% 96%, 3% 98%);
+}
+
+.lightbox-thumbnail-wrapper.active::after {
+    opacity: 1;
+    transform: rotate(-1.5deg);
+}
+
+.lightbox-thumbnail-wrapper.active {
+    z-index: 10;
+    animation: p5-thumb-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards;
+}
+
+.lightbox-thumbnail {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border: 2px solid #222;
+    background-color: #111;
+    opacity: 0.55;
+    transition: opacity 0.25s ease, border-color 0.25s ease;
+    border-radius: 1px;
+    pointer-events: auto !important;
+}
+
+.lightbox-thumbnail-wrapper.active .lightbox-thumbnail {
+    opacity: 1;
+    border-color: #ffffff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-thumbnail-wrapper:hover .lightbox-thumbnail {
+    opacity: 0.85;
+    border-color: #777;
+}
+
+@keyframes p5-thumb-pop {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.22) rotate(-5deg);
+    }
+    100% {
+        transform: scale(1.12) rotate(2deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .lightbox-arrow-left {
+        left: 10px;
+    }
+    .lightbox-arrow-right {
+        right: 10px;
+    }
+    .lightbox-arrow {
+        width: 40px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+    }
+    .lightbox-caption {
+        top: 80px;
+        font-size: 1.1rem;
+        max-width: 85%;
+        --caption-rot: 0deg;
+    }
+}
+
+@keyframes p5-button-jitter {
+    0%, 100% {
+        transform: var(--base-transform) rotate(var(--base-rot)) scale(1);
+    }
+    33% {
+        transform: var(--base-transform) rotate(calc(var(--base-rot) + 2.5deg)) scale(1.05) translate(-1px, -1px);
+    }
+    66% {
+        transform: var(--base-transform) rotate(calc(var(--base-rot) - 2.5deg)) scale(0.97) translate(1px, 1px);
+    }
+}
+

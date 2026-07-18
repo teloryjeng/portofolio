@@ -40,7 +40,7 @@
                 audioCtx.resume();
             }
 
-            const isSubfolder = window.location.pathname.includes("/projects/");
+            const isSubfolder = window.location.pathname.includes("/projects/") || window.location.pathname.includes("/photography/");
             const prefix = isSubfolder ? "../" : "./";
             const url = `${prefix}assets/sfx/${sfxName}`;
 
@@ -60,7 +60,7 @@
             console.log("Web Audio API not supported, falling back:", e);
             if (!isInteractive) return;
             // Fallback to standard Audio if Web Audio API fails
-            const isSubfolder = window.location.pathname.includes("/projects/");
+            const isSubfolder = window.location.pathname.includes("/projects/") || window.location.pathname.includes("/photography/");
             const prefix = isSubfolder ? "../" : "./";
             const audio = new Audio(`${prefix}assets/sfx/${sfxName}`);
             audio.play().catch(err => console.log("Fallback SFX blocked:", err));

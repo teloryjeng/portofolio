@@ -2,8 +2,9 @@
 (function () {
     const currentPath = window.location.pathname;
     const isAboutPage = currentPath.includes("about.html");
-    const isProjectPage = currentPath.includes("project.html");
-    const isSubfolder = currentPath.includes("/projects/");
+    const isProjectPage = currentPath.includes("project.html") || currentPath.includes("/projects/");
+    const isPhotographyPage = currentPath.includes("photography.html") || currentPath.includes("/photography/");
+    const isSubfolder = currentPath.includes("/projects/") || currentPath.includes("/photography/");
     const prefix = isSubfolder ? "../" : "./";
 
     // Helper to generate P5 collage letters for the "LET'S WORK TOGETHER" button
@@ -61,7 +62,7 @@
             <nav class="nav-pill">
                 <a href="${prefix}about.html" class="nav-link ${isAboutPage ? 'active' : ''}">ABOUT ME</a>
                 <a href="${prefix}project.html" class="nav-link ${isProjectPage ? 'active' : ''}">MY PROJECT</a>
-                <a href="${prefix}photography.html" class="nav-link">PHOTOGRAPHY SIDE</a>
+                <a href="${prefix}photography.html" class="nav-link ${isPhotographyPage ? 'active' : ''}">PHOTOGRAPHY SIDE</a>
             </nav>
             <div class="header-action-container">
                 <a href="mailto:muhsururiardan@gmail.com" class="p5-nav-btn" aria-label="Mail Me">

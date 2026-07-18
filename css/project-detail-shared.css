@@ -1,0 +1,618 @@
+/* Project Detail Shared Layout & Components */
+
+/* 0. Shared Hero Section Styling */
+.project-detail-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    width: 100%;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 68%;
+    filter: brightness(.8) contrast(1.1);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
+}
+
+.hero-content-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding-top: var(--header-height);
+}
+
+.hero-titles {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hero-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.hero-main-title {
+    font-family: var(--font-hero-name);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-style: italic;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.85));
+}
+
+.hero-logo-img {
+    max-width: clamp(240px, 45vw, 420px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.85));
+    margin: 1rem 0;
+}
+
+.hero-subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* 1. Shared Story Section Styling */
+.project-story-section {
+    padding: 6rem 0 0;
+    background-color: transparent;
+}
+
+.story-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    color: var(--text-white);
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+}
+
+.story-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    transform: skewX(-20deg);
+}
+
+.story-row {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    margin-bottom: 8rem;
+}
+
+.story-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.story-image-col {
+    flex: 1;
+    position: relative;
+}
+
+.story-text-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.story-image-wrapper,
+.story-video-wrapper {
+    position: relative;
+    width: 100%;
+    border: 3px solid #000000;
+    box-shadow: 8px 8px 0px rgba(229, 46, 46, 0.95);
+    background-color: #000000;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    transition: box-shadow 0.3s ease;
+}
+
+.story-image-wrapper.no-border {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.story-image-wrapper.no-border::after {
+    display: none;
+}
+
+.story-image-wrapper.no-border .story-img {
+    object-fit: contain;
+}
+
+.story-image-wrapper.no-border:hover {
+    box-shadow: none;
+}
+
+.story-image-wrapper.no-border:hover .story-img {
+    transform: none;
+}
+
+.story-image-wrapper::after,
+.story-video-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--primary-color);
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.story-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.story-image-wrapper:hover,
+.story-video-wrapper:hover {
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.95);
+}
+
+.story-image-wrapper:hover .story-img,
+.story-video-wrapper:hover .story-img {
+    transform: scale(1.05);
+}
+
+.row-number-badge {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    font-family: var(--font-hero-name);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 800;
+    padding: 6px 14px;
+    z-index: 10;
+    box-shadow: 3px 3px 0px #000000;
+    border: 2px solid #000000;
+    transform: rotate(-5deg);
+}
+
+.story-row.reverse .row-number-badge {
+    left: auto;
+    right: -15px;
+    transform: rotate(5deg);
+}
+
+.story-paragraph {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--text-white);
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.story-video-wrapper {
+    cursor: pointer;
+}
+
+.video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 70px;
+    height: 70px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 4px 4px 0px #000000;
+    border: 3px solid #000000;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease;
+}
+
+.video-play-btn svg {
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+}
+
+.story-video-wrapper:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+    background-color: #ffffff;
+    color: var(--primary-color);
+}
+
+/* 1.5. Shared Result Section Styling (YouTube Embeds) */
+.project-result-section {
+    padding: 6rem 0;
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-white);
+    margin-bottom: 2rem;
+}
+
+.video-result-container {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.video-result-wrapper {
+    position: relative;
+    width: 100%;
+    border: 3px solid #000000;
+    box-shadow: 8px 8px 0px rgba(229, 46, 46, 0.95);
+    background-color: #000000;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+}
+
+.video-result-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* 2. Shared Tools Section Styling */
+.project-tools-section {
+    padding: 6rem 0;
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tools-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-white);
+    margin-bottom: 4rem;
+}
+
+.tools-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.tool-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background-color: rgba(28, 28, 30, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    min-width: 180px;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px) rotate(2deg);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(229, 46, 46, 0.15);
+}
+
+.tool-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.tool-name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-white);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* 3. Shared 3D Artwork Gallery Section */
+.project-gallery-section {
+    padding: 2rem 0;
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-gallery-section .section-container {
+    max-width: 1600px;
+}
+
+.gallery-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-white);
+    margin-bottom: 4rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.95);
+    background-color: #000000;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    cursor: pointer;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease;
+    filter: brightness(0.9);
+}
+
+.gallery-mv {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #0d0d0d;
+    --poster-color: transparent;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gallery-item:hover .gallery-img,
+.gallery-item:hover .gallery-mv {
+    transform: scale(1.05);
+    filter: brightness(1.05) contrast(1.05);
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 2;
+    transition: border-color 0.3s ease;
+}
+
+.gallery-item:hover::after {
+    border-color: var(--primary-color);
+}
+
+.gallery-item.gallery-item-centered {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16/9;
+}
+
+
+
+/* 3.5. Responsive Hero Text Centering */
+@media (max-width: 992px) {
+    .hero-titles {
+        margin-right: 0 !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .hero-content-overlay .section-container {
+        display: flex;
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .logo-trmenung-hero {
+        transform-origin: center center !important;
+        margin: 2rem 0 !important;
+    }
+}
+
+/* 4. Shared Responsive Styling */
+@media (max-width: 1024px) {
+    .story-row {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .story-row,
+    .story-row.reverse {
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    .story-image-col,
+    .story-text-col {
+        width: 100%;
+    }
+
+    .row-number-badge {
+        top: -10px;
+        left: -10px;
+        font-size: 1.25rem;
+        padding: 4px 10px;
+    }
+
+    .story-row.reverse .row-number-badge {
+        right: auto;
+        left: -10px;
+        transform: rotate(-5deg);
+    }
+
+    .tools-grid {
+        gap: 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+
+    .gallery-item.gallery-item-centered {
+        aspect-ratio: 4/3;
+    }
+}
+
+/* 5. Photography Collage Gallery Styling (Masonry Layout) */
+.photography-gallery-grid {
+    column-count: 4;
+    /* 4 columns on desktop for sleeker gallery grids */
+    column-gap: 1.5rem;
+    width: 100%;
+    padding: 2rem 0;
+}
+
+@media (max-width: 1200px) {
+    .photography-gallery-grid {
+        column-count: 3;
+        /* 3 columns on smaller desktops */
+    }
+}
+
+@media (max-width: 800px) {
+    .photography-gallery-grid {
+        column-count: 2;
+        /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 500px) {
+    .photography-gallery-grid {
+        column-count: 1;
+        /* 1 column on mobile */
+        column-gap: 0;
+    }
+}
+
+.photography-gallery-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    width: 100%;
+    max-height: 480px;
+    /* Limits the vertical size of very tall portrait images */
+    position: relative;
+    border: 3px solid #000000;
+    background-color: #000000;
+    box-shadow: 6px 6px 0px #000000;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+}
+
+/* Add very subtle alternate rotations for P5 feel without breaking layout */
+.photography-gallery-item:nth-child(even) {
+    transform: rotate(0.8deg);
+    box-shadow: -6px 6px 0px var(--primary-color);
+}
+
+.photography-gallery-item:nth-child(odd) {
+    transform: rotate(-0.8deg);
+    box-shadow: 6px 6px 0px #000000;
+}
+
+/* Hover effects */
+.photography-gallery-item:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+    box-shadow: 8px 8px 0px var(--primary-color) !important;
+    z-index: 5;
+}
+
+.photography-gallery-item .gallery-img {
+    width: 100%;
+    height: auto;
+    /* Preserve original aspect ratio (portrait/landscape) */
+    max-height: 480px;
+    /* Keep image inside capped container height */
+    object-fit: cover;
+    /* Crop slightly if it exceeds max-height */
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease;
+    filter: brightness(0.9);
+}
+
+.photography-gallery-item:hover .gallery-img {
+    transform: scale(1.03);
+    filter: brightness(1.05) contrast(1.05);
+}
+
+@media (max-width: 768px) {
+    .photography-gallery-item {
+        transform: rotate(0deg) !important;
+        box-shadow: 5px 5px 0px #000000 !important;
+    }
+}
