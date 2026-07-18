@@ -72,11 +72,11 @@ body.p5-transition-active {
 .p5-bg-cover { transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.3s; }
 
 /* Slide-out (intro transition, when .p5-loaded is applied) */
-.p5-loaded .p5-slash-1 { transform: skewX(-25deg) translateX(-120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.28s; }
-.p5-loaded .p5-slash-2 { transform: skewX(-25deg) translateX(120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.22s; }
-.p5-loaded .p5-slash-3 { transform: skewX(-25deg) translateX(-120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.16s; }
-.p5-loaded .p5-slash-4 { transform: skewX(-25deg) translateX(120vw); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.1s; }
-.p5-loaded .p5-bg-cover { transform: skewX(-25deg) translateX(-350vw); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0s; }
+.p5-loaded .p5-slash-1 { transform: skewX(-25deg) translateX(-120vw); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.35s; }
+.p5-loaded .p5-slash-2 { transform: skewX(-25deg) translateX(120vw); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.28s; }
+.p5-loaded .p5-slash-3 { transform: skewX(-25deg) translateX(-120vw); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.21s; }
+.p5-loaded .p5-slash-4 { transform: skewX(-25deg) translateX(120vw); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.14s; }
+.p5-loaded .p5-bg-cover { transform: skewX(-25deg) translateX(-350vw); transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.05s; }
 
 /* Loading Container in the Bottom Right */
 .p5-loading-container {

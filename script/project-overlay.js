@@ -312,9 +312,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             clearTimeout(window.p5ImageTransitionTimeout);
                         }
 
-                        // Swap source and fade in from black after transition completes (150ms)
-                        window.p5ImageTransitionTimeout = setTimeout(() => {
-                            lightboxImg.src = img.getAttribute('data-full') || img.src;
+                        // Preload and decode the image before revealing it
+                        const tempImg = new Image();
+                        const targetSrc = img.getAttribute('data-full') || img.src;
+                        let loadingDone = false;
+
+                        // Safety timeout (3 seconds) to prevent hanging if image fails to load
+                        const safetyTimeout = setTimeout(() => {
+                            if (!loadingDone) {
+                                loadingDone = true;
+                                applyImageChange();
+                            }
+                        }, 3000);
+
+                        function applyImageChange() {
+                            lightboxImg.src = targetSrc;
                             lightboxImg.alt = img.alt;
                             
                             // Copy inline style object-position from original image if any
@@ -330,9 +342,50 @@ document.addEventListener('DOMContentLoaded', () => {
                                 lightboxCaption.innerText = (img.alt || 'PREVIEW IMAGE') + counter;
                             }
 
-                            // Fade back in by making overlay transparent
-                            imageOverlay.classList.remove('active');
-                        }, 150);
+                            // Fade back in after a tiny paint delay
+                            setTimeout(() => {
+                                imageOverlay.classList.remove('active');
+                            }, 50);
+                        }
+
+                        const handleLoad = () => {
+                            if (loadingDone) return;
+                            if (typeof tempImg.decode === 'function') {
+                                tempImg.decode()
+                                    .then(() => {
+                                        if (!loadingDone) {
+                                            clearTimeout(safetyTimeout);
+                                            loadingDone = true;
+                                            applyImageChange();
+                                        }
+                                    })
+                                    .catch(() => {
+                                        if (!loadingDone) {
+                                            clearTimeout(safetyTimeout);
+                                            loadingDone = true;
+                                            applyImageChange();
+                                        }
+                                    });
+                            } else {
+                                clearTimeout(safetyTimeout);
+                                loadingDone = true;
+                                applyImageChange();
+                            }
+                        };
+
+                        tempImg.src = targetSrc;
+                        if (tempImg.complete) {
+                            handleLoad();
+                        } else {
+                            tempImg.onload = handleLoad;
+                            tempImg.onerror = () => {
+                                if (!loadingDone) {
+                                    clearTimeout(safetyTimeout);
+                                    loadingDone = true;
+                                    applyImageChange();
+                                }
+                            };
+                        }
                     } else {
                         // Instant load for the initial lightbox opening
                         if (imageOverlay) imageOverlay.classList.remove('active');

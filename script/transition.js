@@ -3,7 +3,7 @@
 
     let overlayInjected = false;
     const startTime = Date.now();
-    const minLoadDuration = 600; // Minimum time (ms) to show transition for visual satisfaction
+    const minLoadDuration = 1200; // Minimum time (ms) to show transition for visual satisfaction
 
     // Helper to detect low-spec or slow network devices
     function isLowSpecDevice() {
@@ -281,11 +281,66 @@
             return;
         }
 
+        const endTransitionAfterImages = () => {
+            const heroImages = Array.from(document.querySelectorAll('.hero-bg-img, .project-hero-bg-img'));
+            
+            if (heroImages.length === 0) {
+                endTransition();
+                return;
+            }
+
+            let loaded = 0;
+            const total = heroImages.length;
+            let done = false;
+
+            const markDone = () => {
+                if (done) return;
+                loaded++;
+                if (loaded >= total) {
+                    done = true;
+                    endTransition();
+                }
+            };
+
+            // Safeguard timeout to ensure we don't get stuck forever if an image fails to load
+            const safeguardTimeout = setTimeout(() => {
+                if (!done) {
+                    done = true;
+                    endTransition();
+                }
+            }, 3000);
+
+            heroImages.forEach(img => {
+                if (img.complete) {
+                    if (typeof img.decode === 'function') {
+                        img.decode()
+                            .then(markDone)
+                            .catch(markDone);
+                    } else {
+                        markDone();
+                    }
+                } else {
+                    img.addEventListener('load', () => {
+                        if (typeof img.decode === 'function') {
+                            img.decode()
+                                .then(markDone)
+                                .catch(markDone);
+                        } else {
+                            markDone();
+                        }
+                    });
+                    img.addEventListener('error', () => {
+                        markDone();
+                    });
+                }
+            });
+        };
+
         // Wait for page resources to load fully before sliding out transition
         if (document.readyState === 'complete') {
-            endTransition();
+            endTransitionAfterImages();
         } else {
-            window.addEventListener('load', endTransition);
+            window.addEventListener('load', endTransitionAfterImages);
         }
     }
 
